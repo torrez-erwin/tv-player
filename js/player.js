@@ -1,10 +1,12 @@
-const BASE_URL = 'https://chromecast.cvattv.com.ar';
+const TOKEN_URL = 'https://magisvideo.com/token_flow_automatico/token.json';
 const CONTENT_API = 'https://contentapi-ar.cdn.telefonica.com';
 
 let playerInstance = null;
-let currentToken = null;
-let currentChannel = null;
+let tokenData = null;
 let tokenExpiry = null;
+let currentChannel = null;
+let retryCount = 0;
+const MAX_RETRIES = 3;
 
 function initPlayer() {
   jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
@@ -12,40 +14,57 @@ function initPlayer() {
 }
 
 async function getToken() {
-  if (currentToken && tokenExpiry && Date.now() < tokenExpiry) {
-    return currentToken;
+  if (tokenData && tokenExpiry && Date.now() < tokenExpiry) {
+    return tokenData;
   }
 
   try {
-    const testUrl = `${BASE_URL}/live/c7eds/La_Nacion/SA_Live_dash_enc/La_Nacion.m3u8`;
-    const response = await fetch(testUrl, {
-      signal: AbortSignal.timeout(8000),
-      redirect: 'follow'
+    const response = await fetch(TOKEN_URL, {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
+      }
     });
 
-    if (response.redirected) {
-      const regex = /(https:\/\/.+?)(?=\/live)/;
-      const match = response.url.match(regex);
-      if (match) {
-        currentToken = match[0];
-        tokenExpiry = Date.now() + (30 * 60 * 1000);
-        return currentToken;
-      }
+    if (!response.ok) {
+      throw new Error(`Token request failed: ${response.status}`);
     }
+
+    const data = await response.json();
+
+    if (!data.base_url || !data.jwt) {
+      throw new Error('Invalid token response');
+    }
+
+    tokenData = {
+      baseUrl: data.base_url,
+      jwt: data.jwt,
+      expiresAt: data.expires_at ? data.expires_at * 1000 : Date.now() + (60 * 60 * 1000)
+    };
+
+    tokenExpiry = Date.now() + (50 * 60 * 1000);
+
+    console.log('Token obtained successfully');
+    return tokenData;
+
   } catch (error) {
     console.error('Error getting token:', error);
+    tokenData = null;
+    tokenExpiry = null;
+    return null;
   }
-
-  return currentToken;
 }
 
 function buildStreamUrl(channel, token) {
-  if (!token) return null;
+  if (!token || !token.baseUrl || !token.jwt) {
+    return null;
+  }
 
   const channelName = atob(channel.getURL);
   const number = channel.number || 3;
 
-  return `${token}/live/c${number}eds/${channelName}/SA_Live_dash_enc/${channelName}.mpd`;
+  return `${token.baseUrl}tok_${token.jwt}/live/c${number}eds/${channelName}/SA_Live_dash_enc/${channelName}.mpd`;
 }
 
 function buildDrmConfig(channel) {
@@ -65,9 +84,12 @@ async function playChannel(channel) {
   const homeScreen = document.getElementById('homeScreen');
   if (homeScreen) homeScreen.style.display = 'none';
 
+  hideError();
+
   const token = await getToken();
   if (!token) {
-    showError('No se pudo obtener el token de acceso');
+    showError('No se pudo obtener el token de acceso. Intentando reconectar...');
+    setTimeout(() => playChannel(channel), 3000);
     return;
   }
 
@@ -78,6 +100,8 @@ async function playChannel(channel) {
     showError('URL de stream invalida');
     return;
   }
+
+  console.log('Playing:', channel.name, 'URL:', streamUrl.substring(0, 100) + '...');
 
   try {
     playerInstance.setup({
@@ -93,10 +117,13 @@ async function playChannel(channel) {
       height: '100%',
       autostart: true,
       mute: false,
-      volume: 100
+      volume: 100,
+      primary: 'html5'
     });
 
     playerInstance.on('ready', () => {
+      console.log('Player ready');
+      retryCount = 0;
       playerInstance.setMute(0);
       playerInstance.setVolume(100);
 
@@ -106,23 +133,80 @@ async function playChannel(channel) {
       }
     });
 
-    playerInstance.on('firstFrame', () => {
+    playerInstance.on('play', () => {
+      console.log('Playback started');
+      retryCount = 0;
       updateProgramInfo(channel);
+    });
+
+    playerInstance.on('firstFrame', () => {
+      console.log('First frame rendered');
     });
 
     playerInstance.on('error', (e) => {
       console.error('Player error:', e);
-      setTimeout(() => refreshStream(channel), 3000);
+      handleError(channel);
+    });
+
+    playerInstance.on('buffer', () => {
+      console.log('Buffering...');
     });
 
   } catch (error) {
     console.error('Error setting up player:', error);
-    showError('Error al reproducir el canal');
+    showError('Error al reproducir el canal: ' + error.message);
   }
 }
 
+function handleError(channel) {
+  retryCount++;
+  if (retryCount < MAX_RETRIES) {
+    console.log(`Retry ${retryCount}/${MAX_RETRIES}`);
+    tokenData = null;
+    tokenExpiry = null;
+    setTimeout(() => playChannel(channel), 2000);
+  } else {
+    showError('Error al reproducir el canal. Intentando otro método...');
+    retryCount = 0;
+    setTimeout(() => tryAlternativeMethod(channel), 3000);
+  }
+}
+
+async function tryAlternativeMethod(channel) {
+  const channelName = atob(channel.getURL);
+  const number = channel.number || 3;
+
+  const alternativeUrls = [
+    `https://chromecast.cvattv.com.ar/live/c${number}eds/${channelName}/SA_Live_dash_enc/${channelName}.m3u8`,
+    `https://edge-live15-sl.cvattv.com.ar/live/c${number}eds/${channelName}/SA_Live_dash_enc/${channelName}.mpd`
+  ];
+
+  for (const url of alternativeUrls) {
+    try {
+      console.log('Trying alternative URL:', url.substring(0, 80) + '...');
+      const response = await fetch(url, { method: 'HEAD', signal: AbortSignal.timeout(5000) });
+      if (response.ok) {
+        console.log('Alternative URL works:', url);
+        playerInstance.load({
+          sources: [{
+            file: url,
+            type: url.includes('.m3u8') ? 'hls' : 'dash',
+            drm: buildDrmConfig(channel)
+          }]
+        });
+        playerInstance.play();
+        return;
+      }
+    } catch (e) {
+      console.log('Alternative URL failed:', url.substring(0, 50));
+    }
+  }
+
+  showError('No se pudo conectar al canal. Intente mas tarde.');
+}
+
 async function refreshStream(channel) {
-  currentToken = null;
+  tokenData = null;
   tokenExpiry = null;
   playChannel(channel || currentChannel);
 }
@@ -132,9 +216,13 @@ function showError(message) {
   if (errorEl) {
     errorEl.textContent = message;
     errorEl.style.display = 'block';
-    setTimeout(() => {
-      errorEl.style.display = 'none';
-    }, 5000);
+  }
+}
+
+function hideError() {
+  const errorEl = document.getElementById('appError');
+  if (errorEl) {
+    errorEl.style.display = 'none';
   }
 }
 
