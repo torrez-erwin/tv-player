@@ -1,4 +1,4 @@
-const TOKEN_URL = 'https://magisvideo.com/token_flow_automatico/token.json';
+const TOKEN_URL = '/api/token';
 const CONTENT_API = 'https://contentapi-ar.cdn.telefonica.com';
 
 let playerInstance = null;

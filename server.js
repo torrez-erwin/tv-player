@@ -1,8 +1,11 @@
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const url = require('url');
 
 const PORT = 8080;
+const TOKEN_URL = 'https://magisvideo.com/token_flow_automatico/token.json';
 
 const mimeTypes = {
     '.html': 'text/html',
@@ -16,9 +19,53 @@ const mimeTypes = {
     '.ico': 'image/x-icon'
 };
 
-const server = http.createServer((req, res) => {
-    let filePath = '.' + (req.url === '/' ? '/index.html' : req.url);
+function fetchToken() {
+    return new Promise((resolve, reject) => {
+        https.get(TOKEN_URL, (res) => {
+            let data = '';
+            res.on('data', (chunk) => data += chunk);
+            res.on('end', () => {
+                try {
+                    resolve(JSON.parse(data));
+                } catch (e) {
+                    reject(new Error('Failed to parse token'));
+                }
+            });
+        }).on('error', reject);
+    });
+}
 
+const server = http.createServer(async (req, res) => {
+    const parsedUrl = url.parse(req.url, true);
+
+    // CORS headers for all responses
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    // Handle preflight
+    if (req.method === 'OPTIONS') {
+        res.writeHead(200);
+        res.end();
+        return;
+    }
+
+    // API endpoint for token
+    if (parsedUrl.pathname === '/api/token') {
+        try {
+            const token = await fetchToken();
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(token));
+        } catch (error) {
+            console.error('Token fetch error:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Failed to fetch token' }));
+        }
+        return;
+    }
+
+    // Static files
+    let filePath = '.' + (parsedUrl.pathname === '/' ? '/index.html' : parsedUrl.pathname);
     const ext = String(path.extname(filePath)).toLowerCase();
     const contentType = mimeTypes[ext] || 'application/octet-stream';
 
@@ -43,5 +90,6 @@ server.listen(PORT, () => {
     console.log('   TV Player - Servidor Local');
     console.log('================================');
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`API Token: http://localhost:${PORT}/api/token`);
     console.log('Presiona Ctrl+C para detener');
 });
