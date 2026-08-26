@@ -1,48 +1,11 @@
 let activeChannelIndex = -1;
 let currentCategory = 'Todos';
 let searchQuery = '';
-let debugMode = false;
-let debugLines = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   renderChannelList();
   setupEventListeners();
-  addDebugLine('App initialized', 'success');
-  addDebugLine('Loading token...', 'warning');
-  getToken().then(() => {
-    addDebugLine('Token loaded successfully', 'success');
-  }).catch(err => {
-    addDebugLine('Token error: ' + err.message, 'error');
-  });
 });
-
-function addDebugLine(message, type = '') {
-  const debugInfo = document.getElementById('debugInfo');
-  if (!debugInfo) return;
-
-  const line = document.createElement('div');
-  line.className = 'debug-line' + (type ? ' debug-' + type : '');
-  line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-  debugInfo.appendChild(line);
-  debugInfo.scrollTop = debugInfo.scrollHeight;
-  debugLines.push({ message, type, time: new Date() });
-
-  if (debugLines.length > 50) {
-    debugLines.shift();
-    if (debugInfo.firstChild) {
-      debugInfo.removeChild(debugInfo.firstChild);
-    }
-  }
-}
-
-function toggleDebug() {
-  debugMode = !debugMode;
-  const debugInfo = document.getElementById('debugInfo');
-  if (debugInfo) {
-    debugInfo.classList.toggle('visible', debugMode);
-  }
-  addDebugLine('Debug mode: ' + (debugMode ? 'ON' : 'OFF'), 'warning');
-}
 
 function renderChannelList() {
   const container = document.getElementById('channelList');
@@ -84,10 +47,8 @@ function renderChannelList() {
     channels.forEach(ch => {
       const globalIndex = CHANNELS.indexOf(ch);
       const activeClass = globalIndex === activeChannelIndex ? ' active' : '';
-      const iconSrc = ch.img || '';
       html += `
         <button class="channel-btn${activeClass}" data-index="${globalIndex}" tabindex="0">
-          <img class="channel-icon" src="${iconSrc}" alt="${ch.name}" onerror="this.style.display='none'">
           <span class="channel-name">${ch.name}</span>
           <span class="channel-number">${ch.number || ''}</span>
         </button>
@@ -130,8 +91,6 @@ function selectChannel(index) {
 
   activeChannelIndex = index;
   const channel = CHANNELS[index];
-
-  addDebugLine(`Selecting channel: ${channel.name} (Number: ${channel.number})`, 'success');
 
   document.querySelectorAll('.channel-btn').forEach(btn => {
     btn.classList.remove('active');
@@ -176,13 +135,6 @@ function setupEventListeners() {
         break;
       case 'Escape':
         if (channelList) channelList.classList.remove('open');
-        break;
-      case 'd':
-      case 'D':
-        if (e.ctrlKey || e.metaKey) {
-          e.preventDefault();
-          toggleDebug();
-        }
         break;
     }
 
@@ -232,58 +184,3 @@ function setupEventListeners() {
     }
   });
 }
-
-function setProgramInfo(channel) {
-  updateProgramInfo(channel);
-}
-
-window.testChannel = async function(index) {
-  const channel = CHANNELS[index || 0];
-  addDebugLine(`Testing channel: ${channel.name}`, 'warning');
-  addDebugLine(`Channel URL (base64): ${channel.getURL}`, '');
-  addDebugLine(`Channel URL (decoded): ${atob(channel.getURL)}`, '');
-  addDebugLine(`Channel number: ${channel.number}`, '');
-  addDebugLine(`Key ID: ${channel.keyId}`, '');
-  addDebugLine(`Key: ${channel.key}`, '');
-
-  const token = await getToken();
-  if (token) {
-    addDebugLine(`Token obtained: ${token.baseUrl}`, 'success');
-    const streamUrl = buildStreamUrl(channel, token);
-    addDebugLine(`Stream URL: ${streamUrl}`, 'success');
-
-    try {
-      const response = await fetch(streamUrl, { method: 'HEAD', signal: AbortSignal.timeout(10000) });
-      addDebugLine(`Stream response: ${response.status} ${response.statusText}`, response.ok ? 'success' : 'error');
-    } catch (err) {
-      addDebugLine(`Stream error: ${err.message}`, 'error');
-    }
-  } else {
-    addDebugLine('Failed to get token', 'error');
-  }
-};
-
-window.testAllChannels = async function() {
-  addDebugLine('Testing all channels...', 'warning');
-  const token = await getToken();
-  if (!token) {
-    addDebugLine('No token available', 'error');
-    return;
-  }
-
-  for (let i = 0; i < Math.min(CHANNELS.length, 10); i++) {
-    const channel = CHANNELS[i];
-    const streamUrl = buildStreamUrl(channel, token);
-    try {
-      const response = await fetch(streamUrl, { method: 'HEAD', signal: AbortSignal.timeout(5000) });
-      addDebugLine(`${channel.name}: ${response.status}`, response.ok ? 'success' : 'error');
-    } catch (err) {
-      addDebugLine(`${channel.name}: ${err.message}`, 'error');
-    }
-  }
-  addDebugLine('Test complete', 'success');
-};
-
-window.getDebugInfo = function() {
-  return debugLines;
-};

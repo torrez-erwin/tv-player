@@ -1,896 +1,1411 @@
 const CHANNELS = [
   {
-    name: 'La Nacion+',
-    img: 'https://i.ibb.co/6yX3q8h/la-nacion.png',
-    getURL: 'TGFfTmFjaW9u',
-    keyId: 'f4eade7bbc39b25402acfa301bbad04a',
-    key: 'a74d1df4235a74878327aa8d53ff283c',
-    number: 1,
-    pid: 'LCH3267',
-    category: 'Nacionales'
-  },
-  {
-    name: 'TN',
-    img: 'https://i.ibb.co/3s3hY4t/tn.png',
-    getURL: 'VG9kb05vdGljaWFz',
-    keyId: '7ceb1cd0622cd7e88fcdc99fe3a55de6',
-    key: '951637093d41c7388a1ef3f620cfea21',
-    number: 2,
-    pid: 'LCH3338',
-    category: 'Noticias'
-  },
-  {
-    name: 'A24',
-    img: 'https://i.ibb.co/686Xf0L/a24.png',
-    getURL: 'QW1lcmljYTI0',
-    keyId: '3b1b027dd011af20fd9956c16dc084fb',
-    key: '45f75aacf06593c9b693fe427c67e5b8',
-    number: 3,
-    pid: 'LCH3805',
-    category: 'Noticias'
-  },
-  {
-    name: 'America TV',
-    img: 'https://i.ibb.co/7CqYp9D/america-tv.png',
-    getURL: 'QW1lcmljYVRW',
-    keyId: '8ea235ce0826408b221c498115a9b62d',
-    key: '7aa9266ed91ea4510483370029dfcf45',
-    number: 4,
-    pid: 'LCH3339',
-    category: 'Nacionales'
-  },
-  {
-    name: 'TV Publica',
-    img: 'https://i.ibb.co/3Wf1tWz/tv-publica.png',
-    getURL: 'Q2FuYWw3',
-    keyId: 'cc8c82ac2ec7e9799527c29db7354e81',
-    key: 'cc4aae173dd2ef17ae26be3f7ae87662',
-    number: 5,
-    pid: 'LCH3075',
-    category: 'Nacionales'
-  },
-  {
-    name: 'Canal 9',
-    img: 'https://i.ibb.co/4TGqfWn/canal9.png',
-    getURL: 'Q2FuYWw5',
-    keyId: '24f4ff211136ae6512a1b552200db405',
-    key: '602122f8426c5c942b8c18d299cc6020',
-    number: 6,
-    pid: 'LCH3077',
-    category: 'Nacionales'
-  },
-  {
-    name: 'Telefe',
-    img: 'https://i.ibb.co/spF87Ccr/Telefe-nuevo-logo.png',
-    getURL: 'VGVsZWZlSEQ=',
-    keyId: '3cec1b1ea9799dda5596e64f37e5ed20',
-    key: 'c69f3afde2085dcaaaddbf55246a0323',
-    number: 7,
-    pid: 'LCH3346',
-    category: 'Nacionales'
-  },
-  {
-    name: 'El Trece',
-    img: 'https://i.ibb.co/3sJqYQh/eltrece.png',
-    getURL: 'QXJ0ZWFySEQ',
-    keyId: '5179017f49326d14af0a9ceec831aee6',
-    key: '09b4a463b029ebc28a288bed2da70a76',
-    number: 8,
-    pid: 'LCH3337',
-    category: 'Nacionales'
-  },
-  {
-    name: 'Cronica TV',
-    img: 'https://i.ibb.co/1nL8XfV/cronica.png',
-    getURL: 'Q3JvbmljYVRW',
-    keyId: '745e7abcc90d41ab706b2ac2f4371da3',
-    key: '50acd9d19d1361cb4a8a13a867bdc352',
-    number: 9,
-    pid: 'LCH3079',
-    category: 'Nacionales'
-  },
-  {
-    name: 'C5N',
-    img: 'https://i.ibb.co/68Yc6Hf/c5n.png',
-    getURL: 'QzVO',
-    keyId: '050df5c6e78c774e78c3e99eef8a1b29',
-    key: '0e4141d6ab21a36cbc4da777ab3096d4',
-    number: 10,
-    pid: 'LCH3340',
-    category: 'Noticias'
-  },
-  {
-    name: 'Canal 26',
-    img: 'https://i.ibb.co/3dRnK7X/canal26.png',
-    getURL: 'MjZfVFZfSEQ',
-    keyId: 'e32aaa4b67430b3b51be1efce5a74ac5',
-    key: 'ad60c5e1d378a97271bf8688f094d092',
-    number: 11,
-    pid: 'LCH6358',
-    category: 'Noticias'
-  },
-  {
-    name: 'Metro',
-    img: 'https://i.ibb.co/6yX3q8h/metro.png',
-    getURL: 'TWV0cm8',
-    keyId: '719aa3a5e270c7f69eba374ed80d7986',
-    key: '97ac59118cf4cf242e2c31e87cd38e1e',
-    number: 12,
-    category: 'Nacionales'
-  },
-  {
-    name: 'Ciudad Magazine',
-    img: 'https://i.ibb.co/3dRnK7X/ciudad.png',
-    getURL: 'TWFnYXppbmU=',
-    keyId: '4f1235069d34c22cb73d9b78bae15587',
-    key: '55e068ff6b152e34c66dc639b38e8692',
-    number: 13,
-    pid: 'LCH3369',
-    category: 'Nacionales'
-  },
-  {
-    name: 'CineAR',
-    img: 'https://i.ibb.co/1nL8XfV/cinear.png',
-    getURL: 'SU5DQUFfVHY=',
-    keyId: 'd44f40e49d2945c1a3701c0885ff0b00',
-    key: '6382b6279087402714b6824688c456df',
-    number: 14,
-    pid: 'LCH3804',
-    category: 'Cine'
-  },
-  {
-    name: 'Encuentro',
-    img: 'https://i.ibb.co/4TGqfWn/encuentro.png',
-    getURL: 'RW5jdWVudHJv',
-    keyId: 'ac3ae78beb64478ab390b4ad70e3e0c9',
-    key: 'c7d669761c3516d852a0edf9e07c9198',
-    number: 15,
-    pid: 'LCH3070',
-    category: 'Educacion'
-  },
-  {
-    name: 'Volver',
-    img: 'https://i.ibb.co/3sJqYQh/volver.png',
-    getURL: 'Vm9sdmVy',
-    keyId: '194e53184a424ce6989ad82c5f28fbc5',
-    key: '65d60c5cc4de031172be0a6a51edbdfe',
-    number: 16,
-    pid: 'LCH3869',
-    category: 'Cine'
-  },
-  {
-    name: 'Net TV',
-    img: 'https://i.ibb.co/68Yc6Hf/nettv.png',
-    getURL: 'TmV0X1RW',
-    keyId: '89d433166edd31d56df2a59df8ec6704',
-    key: 'b2015faded0a456d10aa8db1b4cbac68',
-    number: 17,
-    pid: 'LCH3983',
-    category: 'Nacionales'
-  },
-  {
-    name: 'PAKA PAKA',
-    img: 'https://i.ibb.co/1nL8XfV/pakapaka.png',
-    getURL: 'UEFLQV9QQUtB',
-    keyId: '334001b2f2644df9bdf35e92d2b89f8f',
-    key: '475ec87d86ed0636dbb6d6d9d4a43bb7',
-    number: 18,
-    pid: 'LCH3071',
-    category: 'Infantil'
-  },
-  {
-    name: 'Discovery Kids',
-    img: 'https://i.ibb.co/3dRnK7X/discoverykids.png',
-    getURL: 'RGlzY292ZXJ5X0tpZHM=',
-    keyId: 'ffb2f0f63c23a3592d4653e938b9ca19',
-    key: 'd3661ae881fc55fc7a15815cd439747b',
-    number: 19,
-    pid: 'LCH3363',
-    category: 'Infantil'
-  },
-  {
-    name: 'Cartoon Network',
-    img: 'https://i.ibb.co/4TGqfWn/cartoon.png',
-    getURL: 'Q2FydG9vbk5ldHdvcms=',
-    keyId: 'd7df56efaa36a71141d238854cc46d1d',
-    key: '8abb2ee9150d8b2af8ebec0de0f833c8',
-    number: 20,
-    pid: 'LCH3305',
-    category: 'Infantil'
-  },
-  {
-    name: 'Disney Channel',
-    img: 'https://i.ibb.co/6yX3q8h/disney.png',
-    getURL: 'RGlzbmV5Q2hhbm5lbEhE',
-    keyId: '4a742e478d14023e1993e011d9415f94',
-    key: '0df77ede9bc744376836d21afa137dda',
-    number: 21,
-    pid: 'LCH3328',
-    category: 'Infantil'
-  },
-  {
-    name: 'Nickelodeon',
-    img: 'https://i.ibb.co/3sJqYQh/nick.png',
-    getURL: 'Tmlja2Vsb2Rlb24=',
-    keyId: '61c18cefecc2d067beaa9ff181305345',
-    key: '38d6f650cbf9a38fd9f35c01f98e647a',
-    number: 22,
-    pid: 'LCH3306',
-    category: 'Infantil'
-  },
-  {
-    name: 'Adult Swim',
-    img: 'https://i.ibb.co/1nL8XfV/adultswim.png',
-    getURL: 'QWR1bHRfU3dpbQ==',
-    keyId: '9be1432e1e594c8d0648a44d3d9f0c46',
-    key: '8e6c785b14d973c504074b1920f11b15',
-    number: 23,
-    pid: 'LCH6603',
-    category: 'Infantil'
-  },
-  {
-    name: 'Cartoonito',
-    img: 'https://i.ibb.co/4TGqfWn/cartoonito.png',
-    getURL: 'Qm9vbWVyYW5n',
-    keyId: '5792e613fceb699c79cbc0e75fe4cd37',
-    key: 'a672793730476ed23e5c1bce2ff570c6',
-    number: 24,
-    pid: 'LCH3353',
-    category: 'Infantil'
-  },
-  {
-    name: 'History',
-    img: 'https://i.ibb.co/68Yc6Hf/history.png',
-    getURL: 'SGlzdG9yeUhE',
-    keyId: 'e82318e518ba70cea3d7b37bef99e692',
-    key: 'a05fcb634c071a514e3039e1c274b4db',
-    number: 25,
-    pid: 'LCH3176',
-    category: 'Documentales'
-  },
-  {
-    name: 'Animal Planet',
-    img: 'https://i.ibb.co/3dRnK7X/animalplanet.png',
-    getURL: 'QW5pbWFsUGxhbmV0',
-    keyId: '4146a8ecbb0540dc807c6389ee87e0bc',
-    key: '0c3cdc1b3e4617c57361265e9fa4c5bd',
-    number: 26,
-    pid: 'LCH3893',
-    category: 'Documentales'
-  },
-  {
-    name: 'Nat Geo',
-    img: 'https://i.ibb.co/6yX3q8h/natgeo.png',
-    getURL: 'TmF0R2VvSEQ=',
-    keyId: '4be0c61ceddc62294cc9e23b627af53d',
-    key: '852c1935d11c3c53d0a1ceff3bb3bf16',
-    number: 27,
-    pid: 'LCH3322',
-    category: 'Documentales'
-  },
-  {
-    name: 'Discovery Channel',
-    img: 'https://i.ibb.co/3sJqYQh/discovery.png',
-    getURL: 'RGlzY292ZXJ5SEQ=',
-    keyId: 'c283c84a7af0d7c8b9b612a8fb22a001',
-    key: 'f45510c721eebd6eaa86a2e16ccbd77d',
-    number: 28,
-    pid: 'LCH3364',
-    category: 'Documentales'
-  },
-  {
-    name: 'TLC',
-    img: 'https://i.ibb.co/1nL8XfV/tlc.png',
-    getURL: 'VExD',
-    keyId: '58761c7b2819491eb3a0d765842c341a',
-    key: '9dabc48f88bd7f266734e57501bd6f47',
-    number: 29,
-    pid: 'LCH3897',
-    category: 'Documentales'
-  },
-  {
-    name: 'Comedy Central',
-    img: 'https://i.ibb.co/4TGqfWn/comedy.png',
-    getURL: 'Q29tZWR5Q2VudHJhbA',
-    keyId: '4013f784c5ef4318ad47024e61eb094e',
-    key: 'bad433a547f97c7f65cda5e83b8dd416',
-    number: 30,
-    pid: 'LCH3310',
-    category: 'Entretenimiento'
-  },
-  {
-    name: 'E Entertainment',
-    img: 'https://i.ibb.co/68Yc6Hf/eentertainment.png',
-    getURL: 'RV9FbnRlcnRhaW5tZW50X1RlbGV2aXNpb24=',
-    keyId: '5883553207f13e3dc8cecd1113d5ba68',
-    key: '45434d40636dfa0e5312b93218e02185',
-    number: 31,
-    pid: 'LCH3282',
-    category: 'Entretenimiento'
-  },
-  {
-    name: 'AMC',
-    img: 'https://i.ibb.co/3dRnK7X/amc.png',
-    getURL: 'QU1D',
-    keyId: '1fa6a86fd80b6d1425dde74482b5dc9c',
-    key: '744c3636d57a651ab444cf9fe5f95b33',
-    number: 32,
-    pid: 'LCH3887',
-    category: 'Cine'
-  },
-  {
-    name: 'TNT',
-    img: 'https://i.ibb.co/6yX3q8h/tnt.png',
-    getURL: 'VE5UX0hEX0FyZw==',
-    keyId: 'faad1722a575f4d9ec7b774db63c879c',
-    key: 'cf0184830344ba36ad2ffef9dd2dd9d0',
-    number: 33,
-    pid: 'LCH3351',
-    category: 'Cine'
-  },
-  {
-    name: 'TNT Series',
-    img: 'https://i.ibb.co/3sJqYQh/tntseries.png',
-    getURL: 'VE5UU2VyaWVz',
-    keyId: '5c14d6aeb19bf113edf91a7b544253cb',
-    key: '8d776d6f9c5c840ebe88d767dd731692',
-    number: 34,
-    pid: 'LCH3352',
-    category: 'Series'
-  },
-  {
-    name: 'FX',
-    img: 'https://i.ibb.co/1nL8XfV/fx.png',
-    getURL: 'RlhIRA==',
-    keyId: '9ab9c42c713e0fb5517dc77cc19d6755',
-    key: 'd8c271b82387e609b6c19e5e79240aff',
-    number: 35,
-    pid: 'LCH3321',
-    category: 'Series'
-  },
-  {
-    name: 'Studio Universal',
-    img: 'https://i.ibb.co/4TGqfWn/studiouniversal.png',
-    getURL: 'U3R1ZGlvX1VuaXZlcnNhbA==',
-    keyId: 'd9b541e3cd064d569843da42788d4263',
-    key: 'bba5d26ad5051fb3f2cf7e3dd8a4a7d8',
-    number: 36,
-    pid: 'LCH3984',
-    category: 'Cine'
-  },
-  {
-    name: 'Warner Bros',
-    img: 'https://i.ibb.co/68Yc6Hf/warner.png',
-    getURL: 'V2FybmVySEQ=',
-    keyId: '069bd3f0b6c279467e08549f17bf5bd0',
-    key: '5afa7e369a6de1093818a85af912a775',
-    number: 37,
-    pid: 'LCH3173',
-    category: 'Cine'
-  },
-  {
-    name: 'Cinemax',
-    img: 'https://i.ibb.co/3dRnK7X/cinemax.png',
-    getURL: 'Q2luZW1heA==',
-    keyId: '977928a92b82ba3781741a6470f8f45b',
-    key: '51f4e62827c128f7210b79a11587661a',
-    number: 38,
-    pid: 'LCH3123',
-    category: 'Cine'
-  },
-  {
-    name: 'Cinecanal',
-    img: 'https://i.ibb.co/6yX3q8h/cinecanal.png',
-    getURL: 'Q2luZWNhbmFsSEQ=',
-    keyId: '6003e92dd0d9f548329015c9e15dd578',
-    key: '213cf85cb5f9fe569757004a77e05948',
-    number: 39,
-    pid: 'LCH3269',
-    category: 'Cine'
-  },
-  {
-    name: 'Sony Channel',
-    img: 'https://i.ibb.co/3sJqYQh/sony.png',
-    getURL: 'U29ueUhE',
-    keyId: 'fd9619f9d7c2d5115a339941279e0b4b',
-    key: 'bf55635e6591f905659fa27ab3ca2812',
-    number: 40,
-    pid: 'LCH3178',
-    category: 'Cine'
-  },
-  {
-    name: 'Space',
-    img: 'https://i.ibb.co/1nL8XfV/space.png',
-    getURL: 'U3BhY2U=',
-    keyId: '0942e4ecd1bd3567e8f9447f45c20a12',
-    key: 'efca6264f04cf7373de0c30ec79fe909',
-    number: 41,
-    pid: 'LCH3317',
-    category: 'Cine'
-  },
-  {
-    name: 'Star Channel',
-    img: 'https://i.ibb.co/4TGqfWn/star.png',
-    getURL: 'Rk9YSEQ=',
-    keyId: '8023e85ef9d17561ee1b424179b1b15e',
-    key: '477ad189f1fcd2baec026068107f862f',
-    number: 42,
-    pid: 'LCH3268',
-    category: 'Cine'
-  },
-  {
-    name: 'Paramount',
-    img: 'https://i.ibb.co/68Yc6Hf/paramount.png',
-    getURL: 'UGFyYW1vdW50',
-    keyId: 'b85b710ecff3e38f31fc8e249b1c1cef',
-    key: 'a1544c193dde6f8858c9358ee69a60a7',
-    number: 43,
-    pid: 'LCH3307',
-    category: 'Cine'
-  },
-  {
-    name: 'AXN',
-    img: 'https://i.ibb.co/3dRnK7X/axn.png',
-    getURL: 'QVhOSEQ=',
-    keyId: '03e77b5bbf5135a85d587c5af2f2f730',
-    key: '1dd1ab1938a791d03f09eb88478b4880',
-    number: 44,
-    pid: 'LCH3177',
-    category: 'Series'
-  },
-  {
-    name: 'TCM',
-    img: 'https://i.ibb.co/6yX3q8h/tcm.png',
-    getURL: 'VENN',
-    keyId: 'a5f44a5e30714cf3bcee7c7f15a08b4e',
-    key: 'c3c141ae941ab9750339c3af45a65ce2',
-    number: 45,
-    pid: 'LCH3348',
-    category: 'Cine'
-  },
-  {
-    name: 'Universal TV',
-    img: 'https://i.ibb.co/3sJqYQh/universal.png',
-    getURL: 'VW5pdmVyc2FsX0NoYW5uZWxfSEQ=',
-    keyId: '6cf9a13d6fd65a0f2e1cee3969aab9f5',
-    key: 'ea61c3c1adee71b5c2e9744e41d4b75f',
-    number: 46,
-    pid: 'LCH3802',
-    category: 'Series'
-  },
-  {
-    name: 'HBO',
-    img: 'https://i.ibb.co/1nL8XfV/hbo.png',
-    getURL: 'SEJPSEQ=',
-    keyId: '5317283f4110fac3fb3a0becd9f648bc',
-    key: '0754a03c926b1247216e01d9dbcfac28',
-    number: 47,
-    pid: 'LCH3119',
-    category: 'Premium'
-  },
-  {
-    name: 'HBO 2',
-    img: 'https://i.ibb.co/4TGqfWn/hbo2.png',
-    getURL: 'SEJPXzI=',
-    keyId: 'c90cc57ad2c436e5a77db2f8d9db2d85',
-    key: '04f6c73984bdcffd013050608497935d',
-    number: 48,
-    pid: 'LCH3117',
-    category: 'Premium'
-  },
-  {
-    name: 'HBO Plus',
-    img: 'https://i.ibb.co/68Yc6Hf/hboplus.png',
-    getURL: 'SEJPX1BsdXM=',
-    keyId: 'f0e7f7d458990edfab7b98b412564615',
-    key: '79205754b7f84a62661c2dbe9de5dd5d',
-    number: 49,
-    pid: 'LCH3121',
-    category: 'Premium'
-  },
-  {
-    name: 'HBO Family',
-    img: 'https://i.ibb.co/3dRnK7X/hbofamily.png',
-    getURL: 'SEJPX0ZhbWlseQ==',
-    keyId: '535473132f68082160b489482ca35f8e',
-    key: 'e90fd91fcd3fc809bed2b1c0d37f7297',
-    number: 50,
-    pid: 'LCH3118',
-    category: 'Premium'
-  },
-  {
-    name: 'HBO Xtreme',
-    img: 'https://i.ibb.co/6yX3q8h/hboxtreme.png',
-    getURL: 'SEJPX0V4dHJlbWU=',
-    keyId: 'd504011bbef467c0de3a7534e302a6d4',
-    key: '334103e2abe16faa7f9ab2e3097c5a58',
-    number: 51,
-    pid: 'LCH3120',
-    category: 'Premium'
-  },
-  {
-    name: 'HBO Mundi',
-    img: 'https://i.ibb.co/3sJqYQh/hbomundi.png',
-    getURL: 'SEJPX011bmRp',
-    keyId: '7821b2662148fe333d5191acbb8a5c1f',
-    key: 'ae43f3e2545237ebda58b13813b5d328',
-    number: 52,
-    pid: 'LCH3128',
-    category: 'Premium'
-  },
-  {
-    name: 'HBO POP',
-    img: 'https://i.ibb.co/1nL8XfV/hbopop.png',
-    getURL: 'SEJPX1BPUA==',
-    keyId: 'f4e1ce5cef7e9a110fe968f8881b21fa',
-    key: '6bbe2062b150b11496cdd5fbdd9c89d6',
-    number: 53,
-    pid: 'LCH3129',
-    category: 'Premium'
-  },
-  {
-    name: 'HBO Signature',
-    img: 'https://i.ibb.co/4TGqfWn/hbosignature.png',
-    getURL: 'SEJPX1NpZ25hdHVyZQ==',
-    keyId: 'e866499fbc1149f49989672075aa3a68',
-    key: 'd2dd5c95623c6343240981c2202fc311',
-    number: 54,
-    pid: 'LCH3127',
-    category: 'Premium'
-  },
-  {
-    name: 'TyC Sports',
-    img: 'https://i.ibb.co/68Yc6Hf/tycsports.png',
-    getURL: 'VHlDU3BvcnQ',
-    keyId: '2b21c8fa9a329cce311a4c4a4aa996a1',
-    key: 'cc23ea1fb32629f9e1f48c8deeae3e5b',
-    number: 55,
-    pid: 'LCH3356',
-    category: 'Deportes'
-  },
-  {
-    name: 'Fox Sports',
-    img: 'https://i.ibb.co/3dRnK7X/foxsports.png',
-    getURL: 'Rm94U3BvcnRz',
-    keyId: 'cbc2a0c7a38df0aa3333cd71841d3b0d',
-    key: 'aac61b730e2ac1df23f1e872e7541c1b',
-    number: 56,
-    pid: 'LCH3280',
-    category: 'Deportes'
-  },
-  {
-    name: 'Fox Sports 2',
-    img: 'https://i.ibb.co/6yX3q8h/foxsports2.png',
-    getURL: 'Rm94U3BvcnRzMkhE',
-    keyId: 'c98ddffc470fe449ae1a8d6492116976',
-    key: '5086d370e840010232cf4532b16e197f',
-    number: 57,
-    pid: 'LCH3320',
-    category: 'Deportes'
-  },
-  {
-    name: 'Fox Sports 3',
-    img: 'https://i.ibb.co/3sJqYQh/foxsports3.png',
-    getURL: 'Rm94U3BvcnRzM0hE',
-    keyId: '55b47390cf9e4997dae6dac85e057875',
-    key: 'fa39e855543c5d70f30600d59e5e4c1b',
-    number: 58,
-    pid: 'LCH3308',
-    category: 'Deportes'
-  },
-  {
-    name: 'TNT Sports',
-    img: 'https://i.ibb.co/1nL8XfV/tntsports.png',
-    getURL: 'VE5UX1Nwb3J0c19IRA',
-    keyId: 'bc80fa3da696e503f940fde5f681a1c5',
-    key: 'ea46e4e9f1132e8dd71fb77f7d55058a',
-    number: 59,
-    pid: 'LCH3349',
-    category: 'Deportes'
-  },
-  {
-    name: 'ESPN Premium',
-    img: 'https://i.ibb.co/4TGqfWn/espnpremium.png',
-    getURL: 'Rm94X1Nwb3J0c19QcmVtaXVuX0hE',
-    keyId: '4c230dbc7f6a4bfa6ad0aa73ff792374',
-    key: '4186a7c2a15f590a9399886feaec4257',
-    number: 60,
-    pid: 'LCH3281',
-    category: 'Deportes'
-  },
-  {
-    name: 'ESPN',
-    img: 'https://i.ibb.co/68Yc6Hf/espn.png',
-    getURL: 'RVNQTjJIRA',
-    keyId: 'e884b711ab111beb8a7ba1e7bcbdc9bf',
-    key: 'cb89ee3961599e3e648a5aad60895f34',
-    number: 61,
-    pid: 'LCH3175',
-    category: 'Deportes'
-  },
-  {
-    name: 'ESPN 2',
-    img: 'https://i.ibb.co/3dRnK7X/espn2.png',
-    getURL: 'RVNQTjJfQXJn',
-    keyId: '65a5bfa3c7a72dde60be9b0c7406c8fc',
-    key: '0b40ae9f78a7bac3b57ecbf72d3c081e',
-    number: 62,
-    pid: 'LCH3125',
-    category: 'Deportes'
-  },
-  {
-    name: 'ESPN 3',
-    img: 'https://i.ibb.co/6yX3q8h/espn3.png',
-    getURL: 'RVNQTjM',
-    keyId: 'f4c9f97e2a36feab0e5077f2b44cbc4e',
-    key: '1743cd03dfe3736b2c95da91a783af38',
-    number: 63,
-    pid: 'LCH3124',
-    category: 'Deportes'
-  },
-  {
-    name: 'ESPN 4',
-    img: 'https://i.ibb.co/3sJqYQh/espn4.png',
-    getURL: 'RVNQTkhE',
-    keyId: 'cc8d44406ed6bf1898ad9f7a2d64f29e',
-    key: 'fb85d059687ab0fc67805806204edbdf',
-    number: 64,
-    pid: 'LCH3179',
-    category: 'Deportes'
-  },
-  {
-    name: 'DEPORTV',
-    img: 'https://i.ibb.co/1nL8XfV/deportv.png',
-    getURL: 'RGVwb3JUVkhE',
-    keyId: 'f362097815892a4b83950f1d106ff0b2',
-    key: '4349e42e81c31a8389f4a42fcd298928',
-    number: 65,
-    category: 'Deportes'
-  },
-  {
-    name: 'NBA TV',
-    img: 'https://i.ibb.co/4TGqfWn/nbatv.png',
-    getURL: 'TkJBX1RW',
-    keyId: 'd0c38de3c9844e4e9f975dffb3eff8ad',
-    key: '141ca0fdf6ebadfa7107576b8e09e117',
-    number: 66,
-    category: 'Deportes'
-  },
-  {
-    name: 'MTV',
-    img: 'https://i.ibb.co/68Yc6Hf/mtv.png',
-    getURL: 'TVRWX0hE',
-    keyId: '0c9eb3ead38a122ac460ad96a8ebfd2e',
-    key: '66bfbfa4449eb8bc1bcf7577d5bffaad',
-    number: 67,
-    pid: 'LCH3303',
-    category: 'Musica'
-  },
-  {
-    name: 'hTV',
-    img: 'https://i.ibb.co/3dRnK7X/htv.png',
-    getURL: 'SFRW',
-    keyId: 'daecef5fe32f4ce083c6a0c692755d6a',
-    key: 'd4227f24389a9ba77293214b93eb0d7d',
-    number: 68,
-    pid: 'LCH3350',
-    category: 'Musica'
-  },
-  {
-    name: 'Quiero Musica',
-    img: 'https://i.ibb.co/6yX3q8h/quiero.png',
-    getURL: 'UXVpZXJvX0hE',
-    keyId: 'a354b0c82a3a720c4a6f52ed5a1190f4',
-    key: '45a76dcc84f058cfabc8b958d7303b28',
-    number: 69,
-    pid: 'LCH3868',
-    category: 'Musica'
-  },
-  {
-    name: 'Lifetime',
-    img: 'https://i.ibb.co/3sJqYQh/lifetime.png',
-    getURL: 'TGlmZXRpbWU=',
-    keyId: 'eae51b1d67ff47adac7b6bd3a4b1120a',
-    key: 'b4d6bb47193f33ffc12379cdc447455d',
-    number: 70,
-    pid: 'LCH3172',
-    category: 'Entretenimiento'
-  },
-  {
-    name: 'Antena 3',
-    img: 'https://i.ibb.co/1nL8XfV/antena3.png',
-    getURL: 'QW50ZW5hXzM=',
-    keyId: '1e1ad422a6714482b66fa702c16e50c6',
-    key: '4fdf28a0ab91356ca55a75f4e9bf8c92',
-    number: 71,
-    pid: 'LCH3078',
-    category: 'Internacionales'
-  },
-  {
-    name: 'BBC World News',
-    img: 'https://i.ibb.co/4TGqfWn/bbc.png',
-    getURL: 'QkJDX1dvcmxkX05ld3M',
-    keyId: '019f72f2091d4cbea59ff8c85b117f86',
-    key: 'a4eac51195506752f9f63ad24def9c37',
-    number: 72,
-    pid: 'LCH3076',
-    category: 'Internacionales'
-  },
-  {
-    name: 'TV Espana',
-    img: 'https://i.ibb.co/68Yc6Hf/tve.png',
-    getURL: 'VFZfRXNwYW5h',
-    keyId: '53e0a3741e2e4ff5843f165b53309088',
-    key: '45095caabd9a359cd7ea3910d865d643',
-    number: 73,
-    pid: 'LCH3341',
-    category: 'Internacionales'
-  },
-  {
-    name: 'Canal de las Estrellas',
-    img: 'https://i.ibb.co/3dRnK7X/lasestrellas.png',
-    getURL: 'Q2FuYWxfZGVfbGFzX2VzdHJlbGxhcw==',
-    keyId: 'b37d85be9d2b4b619f945beff713fda3',
-    key: '917309c98f072b0bd484dd6560c6d166',
-    number: 74,
-    category: 'Internacionales'
-  },
-  {
-    name: 'Telesur',
-    img: 'https://i.ibb.co/3sJqYQh/telesur.png',
-    getURL: 'VGVsZXN1cg==',
-    keyId: '5235d8ee29f14ce6b26ea5d828aee77a',
-    key: '6bf6bd339e3098babc2ab0b984cd2376',
-    number: 75,
-    category: 'Internacionales'
-  },
-  {
-    name: 'Rai Italia',
-    img: 'https://i.ibb.co/6yX3q8h/rai.png',
-    getURL: 'UkFJ',
-    keyId: 'd214547d7d9a4011a39a899ce6e70071',
-    key: '16c2ed0617cf1e123f3af6ea8875a82d',
-    number: 76,
-    pid: 'LCH3987',
-    category: 'Internacionales'
-  },
-  {
-    name: 'Food Network',
-    img: 'https://i.ibb.co/1nL8XfV/foodnetwork.png',
-    getURL: 'Rm9vZF9OZXR3b3Jr',
-    keyId: '6ca0fbad21a0e908c0280dcc27e6ee0e',
-    key: '62670eedbafdf9360b4ecaed738e26cd',
-    number: 77,
-    pid: 'LCH3342',
-    category: 'Gourmet'
-  },
-  {
-    name: 'Gourmet',
-    img: 'https://i.ibb.co/4TGqfWn/gourmet.png',
-    getURL: 'R291cm1ldA==',
-    keyId: '93d853ac4c8e24cf0295f6f97ee53bd3',
-    key: 'fa5817fab4fb054ccea1abb9f3d767ed',
-    number: 78,
-    pid: 'LCH3312',
-    category: 'Gourmet'
-  },
-  {
-    name: 'Canal 12 Cordoba',
-    img: 'https://i.ibb.co/3dRnK7X/eldoce.png',
-    getURL: 'Q2FuYWxfMTJfQ0JB',
-    keyId: '90422640d3e846159fa450f83870ed4a',
-    key: 'abb3cd94aece1a462df25a8f21085cca',
-    number: 79,
-    category: 'Interior'
-  },
-  {
-    name: 'Telefe Cordoba',
-    img: 'https://i.ibb.co/68Yc6Hf/telefe.png',
-    getURL: 'Q2FuYWxfOF9DQkE',
-    keyId: '103ce214b4d04c8eb4dd43670e956dad',
-    key: '20e030576b8dc4df0d1c68e16af3bc0f',
-    number: 80,
-    category: 'Interior'
-  },
-  {
-    name: 'Telefe Rosario',
-    img: 'https://i.ibb.co/3sJqYQh/telefe.png',
-    getURL: 'Q2FuYWxfNV9Sb3Nhcmlv',
-    keyId: 'c61b5ac8e1664bf5b544e92ea2597e1c',
-    key: '938437ac25f0a18e04efc1a083489edc',
-    number: 81,
-    category: 'Interior'
-  },
-  {
-    name: 'Canal 7 Neuquen',
-    img: 'https://i.ibb.co/6yX3q8h/canal7.png',
-    getURL: 'VGVsZWZlX05ldXF1ZW4=',
-    keyId: '55828b728b8affe6d1d57d050025645d',
-    key: '8ac11ed6d0ccaeac3f8218419f65bb94',
-    number: 82,
-    category: 'Interior'
-  },
-  {
-    name: 'Canal 4 Uruguay',
-    img: 'https://i.ibb.co/3dRnK7X/canal4.png',
-    getURL: 'Q2FuYWw0X1VSVQ==',
-    keyId: 'dabefaac89742589778fcfab78f08354',
-    key: '896dd914683b01c8044ffd34d7b6416b',
-    number: 83,
-    category: 'Internacionales'
-  },
-  {
-    name: 'Canal 10 Uruguay',
-    img: 'https://i.ibb.co/1nL8XfV/canal10.png',
-    getURL: 'Q2FuYWwxMF9VUlU=',
-    keyId: '8dd34782d754f8fcb1e8b38da9ffad0b',
-    key: '6fb97467c0f0ea13f86d41a70e029c51',
-    number: 84,
-    category: 'Internacionales'
-  },
-  {
-    name: 'Canal 12 Uruguay',
-    img: 'https://i.ibb.co/4TGqfWn/canal12.png',
-    getURL: 'Q2FuYWwxMlVSVQ==',
-    keyId: 'dfde9d35d7438bfdf61da5dfac0557c1',
-    key: 'acb13370c03a7254e2bb9cc9d2125017',
-    number: 85,
-    category: 'Internacionales'
-  },
-  {
-    name: 'Paraguay TV',
-    img: 'https://i.ibb.co/68Yc6Hf/pytv.png',
-    getURL: 'UGFyYWd1YXlfVFY=',
-    keyId: '68a5bd6c58e6c05bacfd18d3feec31f2',
-    key: 'ae23f8357512df2dfabcb8104b078182',
-    number: 86,
-    category: 'Internacionales'
-  },
-  {
-    name: 'Trece Paraguay',
-    img: 'https://i.ibb.co/3sJqYQh/trecepy.png',
-    getURL: 'UlBDX0M0',
-    keyId: 'a8093cdcb2d504bd38f16764bd21b6e5',
-    key: 'bfcf3b033b5f0b5ae020751a6746326f',
-    number: 87,
-    category: 'Internacionales'
-  },
-  {
-    name: 'Fox News',
-    img: 'https://i.ibb.co/3dRnK7X/foxnews.png',
-    getURL: 'Rm94X05ld3M=',
-    keyId: '3fe3f31a5e7b48a1b548e9364757ce66',
-    key: '32993fc281207fe915f6f1e990957868',
-    number: 88,
-    category: 'Internacionales'
-  },
-  {
-    name: 'Mas Chic',
-    img: 'https://i.ibb.co/6yX3q8h/maschic.png',
-    getURL: 'TWFzX0NoaWM=',
-    keyId: 'dac8ff1688994efd898222acdd05cafc',
-    key: '22fdf97c7233667518258ed16ccb2545',
-    number: 89,
-    pid: 'LCH3888',
-    category: 'Estilo'
+    name: "TIGO 24/7  Opc.2",
+    url: "http://45.170.130.224:8000/play/a04k/index.m3u8",
+    type: "HLS",
+    category: "FUTBOL LOCAL",
+    number: 1
+  },
+  {
+    name: "Tigo Sport 24/7 Opc. 3",
+    url: "https://stmv1.voxtvhd.com.br/toplatin1/toplatin1/playlist.m3u8",
+    type: "HLS",
+    category: "FUTBOL LOCAL",
+    number: 2
+  },
+  {
+    name: "ESPN Disney+ 1",
+    url: "http://cablemaxsigloxxi.com:8000/play/a0t6/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN DISNEY+",
+    number: 3
+  },
+  {
+    name: "ESPN Disney+ 2",
+    url: "http://cablemaxsigloxxi.com:8000/play/a0t5/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN DISNEY+",
+    number: 4
+  },
+  {
+    name: "ESPN Disney+ 3",
+    url: "https://cablemaxsigloxxi.com:8000/play/a07p/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN DISNEY+",
+    number: 5
+  },
+  {
+    name: "ESPN Disney+ 6",
+    url: "http://186.33.54.46:8000/play/a01c/index.m3u8",
+    type: "HLS",
+    category: "ESPN DISNEY+",
+    number: 6
+  },
+  {
+    name: "ESPN Disney+ 4",
+    url: "http://cablemaxsigloxxi.com:8000/play/a075/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN DISNEY+",
+    number: 7
+  },
+  {
+    name: "ESPN Disney+ 5",
+    url: "http://cablemaxsigloxxi.com:8000/play/a0t1/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN DISNEY+",
+    number: 8
+  },
+  {
+    name: "ESPN Disney+ 7",
+    url: "http://cablemaxsigloxxi.com:8000/play/a0l5/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN DISNEY+",
+    number: 9
+  },
+  {
+    name: "AL NASSR VS AL HILAL",
+    url: "https://aegis-cloudfront-1.tubi.video/62883227-8fc8-4992-97ff-614d283b4789/playlist.m3u8",
+    type: "HLS",
+    category: "EVENTOS DEL DIA",
+    number: 10
+  },
+  {
+    name: "SNT",
+    url: "https://d2qsan2ut81n2k.cloudfront.net/live/2e1f1b6a-9d03-4194-8559-2eabe61a1555/ts:abr.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 11
+  },
+  {
+    name: "CNN ESPA\u00d1OL",
+    url: "http://45.170.130.224:8000/play/a01b/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 12
+  },
+  {
+    name: "SNT SD",
+    url: "http://45.170.130.224:8000/play/a013/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 13
+  },
+  {
+    name: "C9N",
+    url: "https://d1y0t05eznkmpn.cloudfront.net/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 14
+  },
+  {
+    name: "C9N SD",
+    url: "http://45.170.130.224:8000/play/a033/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 15
+  },
+  {
+    name: "TELEFUTURO",
+    url: "https://rds3gen.desdeparaguay.net/telefuturo/telefuturo_alta/index.m3u8?admin=tvaccion",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 16
+  },
+  {
+    name: "TELEFUTURO PY SD",
+    url: "http://45.170.130.224:8000/play/a04m/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 17
+  },
+  {
+    name: "NPY",
+    url: "https://rds3gen.desdeparaguay.net/npy/npy_py_alta/playlist.m3u8?admin=tvaccion",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 18
+  },
+  {
+    name: "NPY SD",
+    url: "http://45.170.130.224:8000/play/a035/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 19
+  },
+  {
+    name: "GEN TV",
+    url: "https://rds3gen.desdeparaguay.net/gentv/gentv_py_alta/chunklist.m3u8?admin=nacion",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 20
+  },
+  {
+    name: "GEN HD",
+    url: "http://45.170.130.224:8000/play/a04j/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 21
+  },
+  {
+    name: "MONUMENTAL AM 1080 TV",
+    url: "https://rds3gen.desdeparaguay.net/monumentaltv/monumentaltv_med/playlist.m3u8?admin=tvaccion",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 22
+  },
+  {
+    name: "LA TELE HD",
+    url: "https://rds3gen.desdeparaguay.net/latele/latele_py_alta/playlist.m3u8?admin=tvaccion",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 23
+  },
+  {
+    name: "LA TELE SD",
+    url: "http://45.170.130.224:8000/play/a03u/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 24
+  },
+  {
+    name: "SUR TV  SD",
+    url: "http://45.170.130.224:8000/play/a036/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 25
+  },
+  {
+    name: "AMERICA TV PY",
+    url: "http://45.170.130.224:8000/play/a02o/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 26
+  },
+  {
+    name: "HEI",
+    url: "https://rds3gen.desdeparaguay.net/heitv/heitv_py_alta/playlist.m3u8?admin=nacion",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 27
+  },
+  {
+    name: "POPU TV",
+    url: "https://rds3gen.desdeparaguay.net/universotv/universotv_py_alta/chunklist.m3u8?admin=nacion",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 28
+  },
+  {
+    name: "PARAGUAY TV SD",
+    url: "http://45.170.130.224:8000/play/a02r/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 29
+  },
+  {
+    name: "E40",
+    url: "https://rds3gen.desdeparaguay.net/e40tv/e40tv_py_alta/playlist.m3u8?admin=tvaccion",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 30
+  },
+  {
+    name: "PROBANDO",
+    url: "http://45.170.130.224:8000/play/a04i/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 31
+  },
+  {
+    name: "PARAVISION  SD",
+    url: "http://45.170.130.224:8000/play/a032/index.m3u8",
+    type: "HLS",
+    category: "CANALES PARAGUAYO",
+    number: 32
+  },
+  {
+    name: "\u00d1ANDUTI TV",
+    url: "https://rds3gen.desdeparaguay.net/nandutitv/nandutitv_baja/playlist.m3u8",
+    type: "HLS",
+    category: "PARAGUAY",
+    number: 33
+  },
+  {
+    name: "UNION TV",
+    url: "https://copacogen.desdeparaguay.net/800tv/800tv/playlist.m3u8",
+    type: "HLS",
+    category: "PARAGUAY",
+    number: 34
+  },
+  {
+    name: "TELEFE Arg",
+    url: "http://181.13.252.102:8000/play/a06c/index.m3u8",
+    type: "HLS",
+    category: "ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 35
+  },
+  {
+    name: "AMERICA TV  Arg",
+    url: "http://181.209.105.115:2525/play/america/index.m3u8",
+    type: "HLS",
+    category: "ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 36
+  },
+  {
+    name: "EL TRECE HD Arg",
+    url: "https://livetrx01.vodgc.net/eltrecetv/index.m3u8",
+    type: "HLS",
+    category: "ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 37
+  },
+  {
+    name: "C5N Arg",
+    url: "http://181.13.252.102:8000/play/a01p/index.m3u8",
+    type: "HLS",
+    category: "ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 38
+  },
+  {
+    name: "CRONICA",
+    url: "http://181.209.105.115:2525/play/cronica/index.m3u8",
+    type: "HLS",
+    category: "ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 39
+  },
+  {
+    name: "TN HD Arg",
+    url: "http://181.209.105.115:2525/play/tn/index.m3u8",
+    type: "HLS",
+    category: "ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 40
+  },
+  {
+    name: "AR|12",
+    url: "http://190.7.19.197:232/play/a00o/index.m3u8",
+    type: "HLS",
+    category: "ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 41
+  },
+  {
+    name: "EL TRECE",
+    url: "https://livetrx01.vodgc.net/eltrecetv/index.m3u8",
+    type: "HLS",
+    category: "ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 42
+  },
+  {
+    name: "CNN ESPA\u00d1OL",
+    url: "http://181.13.252.102:8000/play/a054/index.m3u8",
+    type: "HLS",
+    category: "INTERNACIONALES",
+    number: 43
+  },
+  {
+    name: "C5N ARG",
+    url: "http://181.13.252.102:8000/play/a01p/index.m3u8",
+    type: "HLS",
+    category: "INTERNACIONALES",
+    number: 44
+  },
+  {
+    name: "GALICIA TV",
+    url: "http://181.13.252.102:8000/play/a02q/index.m3u8",
+    type: "HLS",
+    category: "INTERNACIONALES",
+    number: 45
+  },
+  {
+    name: "RAI ITALIA",
+    url: "http://181.13.252.102:8000/play/a02p/index.m3u8",
+    type: "HLS",
+    category: "INTERNACIONALES",
+    number: 46
+  },
+  {
+    name: "TVE",
+    url: "http://181.13.252.102:8000/play/a072/index.m3u8",
+    type: "HLS",
+    category: "INTERNACIONALES",
+    number: 47
+  },
+  {
+    name: "RT ESPA\u00d1OL",
+    url: "http://181.13.252.102:8000/play/a0ac/index.m3u8",
+    type: "HLS",
+    category: "INTERNACIONALES",
+    number: 48
+  },
+  {
+    name: "CNN CHILE",
+    url: "http://45.170.130.224:8000/play/a00y/index.m3u8",
+    type: "HLS",
+    category: "INTERNACIONALES",
+    number: 49
+  },
+  {
+    name: "CNN BRASIL",
+    url: "https://d25usgadhphvwi.cloudfront.net/hls/main.m3u8",
+    type: "HLS",
+    category: "INTERNACIONALES",
+    number: 50
+  },
+  {
+    name: "GRAN HERMANO",
+    url: "https://dplatino.net:80/live/B002F0072A7E/02F0072A7EB0/454927.m3u8",
+    type: "HLS",
+    category: "GRAN HERMANO ARG.",
+    number: 51
+  },
+  {
+    name: "ESPN PREMIUM",
+    url: "http://181.13.252.102:8000/play/a078/index.m3u8",
+    type: "HLS",
+    category: "DEPORTES ESPN Y FOX SPORT ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 52
+  },
+  {
+    name: "FOX SPORT AR",
+    url: "http://45.5.151.147:8000/play/a00n/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTES ESPN Y FOX SPORT ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 53
+  },
+  {
+    name: "FOX SPORT 2",
+    url: "http://45.5.151.147:8000/play/a00o/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTES ESPN Y FOX SPORT ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 54
+  },
+  {
+    name: "FOX SPORT 3",
+    url: "http://45.5.151.147:8000/play/a00p/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTES ESPN Y FOX SPORT ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 55
+  },
+  {
+    name: "ESPN PREMIUM IPTV",
+    url: "http://45.5.151.147:8000/play/a00m/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTES ESPN Y FOX SPORT ARGENTINA\ud83c\udde6\ud83c\uddf7",
+    number: 56
+  },
+  {
+    name: "Directv sport 1",
+    url: "http://177.53.152.117:8000/play/a07f/index.m3u8",
+    type: "HLS",
+    category: "Directv Sport \ud83c\udde6\ud83c\uddf7",
+    number: 57
+  },
+  {
+    name: "Directv Sport plus",
+    url: "http://45.170.130.224:8000/play/a06h/index.m3u8",
+    type: "HLS",
+    category: "Directv Sport \ud83c\udde6\ud83c\uddf7",
+    number: 58
+  },
+  {
+    name: "Motor Sur\ud83c\uddf5\ud83c\uddfe\ud83c\udfce",
+    url: "https://edge.enhdtv.com/8116/index.m3u8",
+    type: "HLS",
+    category: "\ud83c\udfceDeportes Motors\ud83c\udfc1",
+    number: 59
+  },
+  {
+    name: "RALLY TV",
+    url: "https://dms.redbull.tv/v5/destination/rallytv/07f960dc-fd36-466c-971f-64a597518b83/personal_computer/http/us/es_US/playlist.m3u8",
+    type: "HLS",
+    category: "\ud83c\udfceDeportes Motors\ud83c\udfc1",
+    number: 60
+  },
+  {
+    name: "FOX ONE",
+    url: "https://live-manifest.production-public.tubi.io/live/35557bb9-7c94-40ea-85f7-c94d852f8374/playlist.m3u8",
+    type: "HLS",
+    category: "DEPORTE MEXICO\ud83c\uddf2\ud83c\uddfd",
+    number: 61
+  },
+  {
+    name: "FOX ONE EXTRA",
+    url: "https://live-manifest.production-public.tubi.io/live/13a764a8-a91d-4a17-a7f7-ee99250598b5/playlist.m3u8",
+    type: "HLS",
+    category: "DEPORTE MEXICO\ud83c\uddf2\ud83c\uddfd",
+    number: 62
+  },
+  {
+    name: "FOX ONE 2",
+    url: "http://74.208.30.121/a181/tracks-v1a1/mono.m3u8",
+    type: "HLS",
+    category: "DEPORTE MEXICO\ud83c\uddf2\ud83c\uddfd",
+    number: 63
+  },
+  {
+    name: "ESPN 1",
+    url: "http://45.170.130.224:8000/play/a01y/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 64
+  },
+  {
+    name: "ESPN 2 Latin",
+    url: "http://45.170.130.224:8000/play/a01x/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 65
+  },
+  {
+    name: "ESPN 3",
+    url: "http://45.170.130.224:8000/play/a03s/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 66
+  },
+  {
+    name: "ESPN 4sd",
+    url: "http://45.170.130.224:8000/play/a02k/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 67
+  },
+  {
+    name: "ESPN 4",
+    url: "http://45.170.130.224:8000/play/a01w/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 68
+  },
+  {
+    name: "ESPN CO",
+    url: "http://45.170.130.224:8000/play/a034/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 69
+  },
+  {
+    name: "TIGO EVENTOS",
+    url: "http://45.170.130.224:8000/play/a04l/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 70
+  },
+  {
+    name: "EVENTOS HD",
+    url: "http://45.170.130.224:8000/play/a04k/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 71
+  },
+  {
+    name: "ESPN 7",
+    url: "http://45.170.130.224:8000/play/a027/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 72
+  },
+  {
+    name: "FOX SPORTS 3",
+    url: "http://45.170.130.224:8000/play/a028/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 73
+  },
+  {
+    name: "TyC Sports",
+    url: "http://45.170.130.224:8000/play/a020/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ARGENTINA SAT",
+    number: 74
+  },
+  {
+    name: "ESPN 1",
+    url: "http://38.187.2.124:8000/play/a00y/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE PER\u00da\ud83c\uddf5\ud83c\uddea",
+    number: 75
+  },
+  {
+    name: "ESPN 2",
+    url: "http://38.187.2.124:8000/play/a01d/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE PER\u00da\ud83c\uddf5\ud83c\uddea",
+    number: 76
+  },
+  {
+    name: "Espn 3",
+    url: "http://38.187.2.124:8000/play/a01n/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE PER\u00da\ud83c\uddf5\ud83c\uddea",
+    number: 77
+  },
+  {
+    name: "ESPN 4",
+    url: "http://38.187.2.124:8000/play/a00i/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE PER\u00da\ud83c\uddf5\ud83c\uddea",
+    number: 78
+  },
+  {
+    name: "ESPN 5",
+    url: "http://38.187.2.124:8000/play/a01e/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE PER\u00da\ud83c\uddf5\ud83c\uddea",
+    number: 79
+  },
+  {
+    name: "ESPN 6",
+    url: "http://38.187.2.124:8000/play/a017/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE PER\u00da\ud83c\uddf5\ud83c\uddea",
+    number: 80
+  },
+  {
+    name: "ESPN 7",
+    url: "http://38.187.2.124:8000/play/a00b/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE PER\u00da\ud83c\uddf5\ud83c\uddea",
+    number: 81
+  },
+  {
+    name: "LIGA 1 MAX",
+    url: "http://38.224.231.47:8000/play/a06a/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE PER\u00da\ud83c\uddf5\ud83c\uddea",
+    number: 82
+  },
+  {
+    name: "ESPN PREMIUN",
+    url: "http://38.187.2.124:8000/play/a010/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE PER\u00da\ud83c\uddf5\ud83c\uddea",
+    number: 83
+  },
+  {
+    name: "Dazn la liga",
+    url: "http://cb163385.amazzin.pw/iptv/MLLNWFWVC3H9YNUQTDBDHZGK/31856/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE ESPA\u00d1A\ud83c\uddea\ud83c\uddf8",
+    number: 84
+  },
+  {
+    name: "ESPN 1",
+    url: "http://190.93.229.30:8000/play/a0fw/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE CHILE\ud83c\udde8\ud83c\uddf1",
+    number: 85
+  },
+  {
+    name: "ESPN 2",
+    url: "http://190.93.229.30:8000/play/a0ba/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE CHILE\ud83c\udde8\ud83c\uddf1",
+    number: 86
+  },
+  {
+    name: "ESPN 3",
+    url: "http://190.93.229.30:8000/play/a0f6/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE CHILE\ud83c\udde8\ud83c\uddf1",
+    number: 87
+  },
+  {
+    name: "ESPN 4",
+    url: "http://190.93.229.30:8000/play/a0hz/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE CHILE\ud83c\udde8\ud83c\uddf1",
+    number: 88
+  },
+  {
+    name: "ESPN 5",
+    url: "http://190.93.229.30:8000/play/a0bb/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE CHILE\ud83c\udde8\ud83c\uddf1",
+    number: 89
+  },
+  {
+    name: "ESPN 6",
+    url: "http://190.93.229.30:8000/play/a0b4/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE CHILE\ud83c\udde8\ud83c\uddf1",
+    number: 90
+  },
+  {
+    name: "ESPN 7",
+    url: "http://190.93.229.30:8000/play/a0hs/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE CHILE\ud83c\udde8\ud83c\uddf1",
+    number: 91
+  },
+  {
+    name: "ESPN PREMIUM",
+    url: "http://190.93.229.30:8000/play/a0fd/index.m3u8",
+    type: "HLS",
+    category: "DEPORTE CHILE\ud83c\udde8\ud83c\uddf1",
+    number: 92
+  },
+  {
+    name: "ESPN 1",
+    url: "http://45.188.229.33:8000/play/a1ac/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE ECUADOR\ud83c\uddea\ud83c\udde8",
+    number: 93
+  },
+  {
+    name: "ESPN 2",
+    url: "http://45.188.229.33:8000/play/a1ab/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE ECUADOR\ud83c\uddea\ud83c\udde8",
+    number: 94
+  },
+  {
+    name: "ESPN 3",
+    url: "http://45.188.229.33:8000/play/a1b0/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE ECUADOR\ud83c\uddea\ud83c\udde8",
+    number: 95
+  },
+  {
+    name: "ESPN 4",
+    url: "http://45.188.229.33:8000/play/a10g/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE ECUADOR\ud83c\uddea\ud83c\udde8",
+    number: 96
+  },
+  {
+    name: "ESPN 5",
+    url: "http://45.188.229.33:8000/play/a12n/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE ECUADOR\ud83c\uddea\ud83c\udde8",
+    number: 97
+  },
+  {
+    name: "ESPN 6",
+    url: "http://45.188.229.33:8000/play/a12h/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE ECUADOR\ud83c\uddea\ud83c\udde8",
+    number: 98
+  },
+  {
+    name: "ESPN 7",
+    url: "http://45.188.229.33:8000/play/a1ey/index.m3u8?hls",
+    type: "HLS",
+    category: "DEPORTE ECUADOR\ud83c\uddea\ud83c\udde8",
+    number: 99
+  },
+  {
+    name: "ESPN 1",
+    url: "http://181.118.158.103:8000/play/a038/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN COLOMBIA\ud83c\udde8\ud83c\uddf4",
+    number: 100
+  },
+  {
+    name: "ESPN 2",
+    url: "http://181.118.158.103:8000/play/a039/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN COLOMBIA\ud83c\udde8\ud83c\uddf4",
+    number: 101
+  },
+  {
+    name: "ESPN 3",
+    url: "http://181.118.158.103:8000/play/a03a/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN COLOMBIA\ud83c\udde8\ud83c\uddf4",
+    number: 102
+  },
+  {
+    name: "ESPN 4",
+    url: "http://181.78.8.199:8000/play/a0do/index.m3u8",
+    type: "HLS",
+    category: "ESPN COLOMBIA\ud83c\udde8\ud83c\uddf4",
+    number: 103
+  },
+  {
+    name: "ESPN 5",
+    url: "http://181.118.158.103:8000/play/a03c/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN COLOMBIA\ud83c\udde8\ud83c\uddf4",
+    number: 104
+  },
+  {
+    name: "ESPN 6",
+    url: "http://181.118.158.103:8000/play/a03d/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN COLOMBIA\ud83c\udde8\ud83c\uddf4",
+    number: 105
+  },
+  {
+    name: "ESPN 7",
+    url: "http://181.118.158.103:8000/play/a03e/index.m3u8?hls",
+    type: "HLS",
+    category: "ESPN COLOMBIA\ud83c\udde8\ud83c\uddf4",
+    number: 106
+  },
+  {
+    name: "CAZ\u00c9 TV",
+    url: "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8",
+    type: "HLS",
+    category: "DEPORTE BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 107
+  },
+  {
+    name: "NSPORT",
+    url: "https://ssai2-ads.api.leiniao.com/global-adinsertion-api/hls/live/v2/e8f0afbd0dc24b80ac2737ef1d36210e/playlist.m3u8",
+    type: "HLS",
+    category: "DEPORTE BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 108
+  },
+  {
+    name: "RALLY TV",
+    url: "https://dms.redbull.tv/v5/destination/rallytv/07f960dc-fd36-466c-971f-64a597518b83/personal_computer/http/us/es_US/playlist.m3u8",
+    type: "HLS",
+    category: "\u26bd DEPORTES VARIADOS",
+    number: 109
+  },
+  {
+    name: "UFC EVENTOS",
+    url: "http://108.181.2.153:8080/live/xtream2323XSTREA/gphzPzzWFcRb/519020.m3u8?_cb=1776093328789&token=ThUKWEAMEQgXBlwCA1pXUQ9cDFZRUgUDBgIBU1cDUFFXAwQLCwIACldGFERDTREDVwlnWVRBDAQGXQZXUhxAFEZSEGZaABEIF1AJUgAPU0QaRkxZXQYUCwdIFBULVEBbFwRbCgNSAAoXSBoDSE0GFFgFVG9UBkBYVAEUXwxFDg0ZFQ1XbABWX1QKXEQKG1JEGkZRQ0BBDF9CCFpJQFILFUdWFlwRXhEGA1EORBwbAAlDCkxCSUEME2c9FElAVRoVUFkRUFwKEQgXCQsTCBtPRF8XZ0JVEEJDUgVbABASWEMFFU4bXgVLbVYLVghVWhcPWQpLEgpBBRMbRlsKDFkWDkdoElBXRgkQBl0LVgUPWkRL",
+    type: "HLS",
+    category: "\u26bd DEPORTES VARIADOS",
+    number: 110
+  },
+  {
+    name: "Boxeo Tv",
+    url: "http://108.181.2.153:8080/live/xtream2323XSTREA/gphzPzzWFcRb/519024.m3u8?_cb=1776093328789&token=ThUKWEAMEQgXBl0FVAxTAgVSCQgFUVJXUlZSUgdSVVdQAlNcV1AFBgdGFERDTREDVwlnWVRBDAQGXQZXVhxAFEZSEGZaABEIF1AJUgAPU0QaRkxZXQYUCwdIFBULVEBbW0IOVR9GVkpBAUoIUVU8AlMSUVNVQQxfQghaSUBfDD5RUg9YXQARCBdVGkoSUBAWFF5WRVwPGhNVDUIXA0QHQw9ZF1VfSBFRWhFWEkJAQVwUNGESHEFTSUMBWBYLXwxDDxUPCkZcER4XDUs5QlwQEkQBWV1VERQLFVQUSUBdAxlqVA1XXQFQRlwLVhUSA0FVFEgaXV8NX0VYFmkVC1RAW1tCDlVO",
+    type: "HLS",
+    category: "\u26bd DEPORTES VARIADOS",
+    number: 111
+  },
+  {
+    name: "CINEMAX Sat",
+    url: "http://45.170.130.224:8000/play/a03e/index.m3u8",
+    type: "HLS",
+    category: "CINE Y SERIES \ud83c\udfac",
+    number: 112
+  },
+  {
+    name: "CANELA NARCO DRAMA",
+    url: "https://amg00658-amg00658c13-canelatv-international-7229.playouts.now.amagi.tv/playlist/amg00658-canelamediafast-narcodramaltus-canelatvinternational/cb573f166573638b84c83c65cef24082847b3dcb0e6c886470af4a9765d97800dbe8ae84ae5b910c4c9e1fc061017d360439cd1dd56c49c1da63b820743c4b21fdcde00080dd0d0cb1df11292ca36265299a7369cc350f7bd2ec5a2f803ebe764c53cb017c593f88f258a9764cc59e0a957f39e8fc8b307b24455a9c5a43e6a64cb7fdb25e40da6aa5e50141947b44fa83439fd401e987d30a83118475f6179ec1a48f8115d48cad599c04ed241959501ef3e129c9be37d9de9f7f309f74174a1f5be1b692f94b4ee22d2159eba5a1d506fb1ddafb46eb0167e170f2278d368b54be10b7e43cc4c7d9f1631b40ceae5a71379fe7b584ff3936cf0d91cbeadc7d7995f75a6c519318b24f2a2880c2d8008bd110a9a33189c60d775aeeb01ff5f7d08aecc2e520fa0cebe5a5d56a18030967068f59d0dc079f2dd87cad994b72050045f8cc5189d2dd0b332f16d0d80a99421ae0d98ed7880a3f92341d00970ab34e1653dc26656ae42ee0e84d06e6281f893902ee4b0a9050f5ae2df6be818e6c58b9d3d3309b058d9b2be0f668d105bdf29fd1884e6a760e10e5e06f19357d8376f0d2dee4647b788695e3dfb09ebc9a5b6d3f2284f0f378dbafcd2c0f1fc2525c003e7045d06c5e0eae838cfb8a899ef18c70ecb685e4d6f29f9f17354d9bcda38884d78567bd76d0cefa3615f63809b21e0a3c67dfba8c16a8761b3e326a8901604caa141a6cded598b5d7d0358eab6da46e364f23dda6430849736373069ea76dd575eb8752ecc89d129fb9cd5a6ead088e2d5cdedcd567fdada6c24c049fe3173a6f85dc2ac03c7c93479a7bc6823e88f066071a3d52418ddb07a811ea89e8b241f01ba4410771fd6bfbcdb3c1b14862a7c01a7d6373167d197579230bb4dfaf142373feb32ae31dabab62a04c503c28549ce5245b95e363138c3f1d31f1f9d3ea4dabd1a037c892a28f0ee36cc4541a627f4adceb42fd53/149/1920x1080_6423560/index.m3u8",
+    type: "HLS",
+    category: "\ud83c\udfac CINES 24/7",
+    number: 113
+  },
+  {
+    name: "CANELA CINEMA",
+    url: "https://amg00658-amg00658c8-canelatv-international-7227.playouts.now.amagi.tv/playlist/amg00658-canelamediafast-cinemalt-canelatvinternational/playlist.m3u8",
+    type: "HLS",
+    category: "\ud83c\udfac CINES 24/7",
+    number: 114
+  },
+  {
+    name: "CINE PLEX",
+    url: "https://amg00658-amg00658c95-canelatv-international-6696.playouts.now.amagi.tv/playlist/amg00658-canelamediafast-pelimexta-canelatvinternational/playlist.m3u8",
+    type: "HLS",
+    category: "\ud83c\udfac CINES 24/7",
+    number: 115
+  },
+  {
+    name: "The Walking Dead",
+    url: "https://jmp2.uk/plu-678aa0b3680721c77c5035dd.m3u8",
+    type: "HLS",
+    category: "\ud83c\udfac CINES 24/7",
+    number: 116
+  },
+  {
+    name: "ACCION MEXICANA",
+    url: "https://amg00658-amg00658c104-canelatv-international-7980.playouts.now.amagi.tv/playlist/amg00658-canelamediafast-accionmexicana-canelatvinternational/playlist.m3u8",
+    type: "HLS",
+    category: "\ud83c\udfac CINES 24/7",
+    number: 117
+  },
+  {
+    name: "DIOS TV",
+    url: "https://s.emisoras.tv:8081/diostevetv/tracks-v1a1/mono.m3u8",
+    type: "HLS",
+    category: "\ud83d\ude4f\ud83c\udffb CANALES CRISTIANOS",
+    number: 118
+  },
+  {
+    name: "Daystar Espa\u00f1ol",
+    url: "https://live-mcl.cdn01.net/web/v2a5w28m3/playlist.m3u8",
+    type: "HLS",
+    category: "\ud83d\ude4f\ud83c\udffb CANALES CRISTIANOS",
+    number: 119
+  },
+  {
+    name: "ESPERANZA TV",
+    url: "https://cdn-us-mia.b-cdn.net/hcorg_7IehiLEKH5q/s/jsl_kRualFlRu2u/master.m3u8",
+    type: "HLS",
+    category: "\ud83d\ude4f\ud83c\udffb CANALES CRISTIANOS",
+    number: 120
+  },
+  {
+    name: "MISI\u00d3N DE VIDA",
+    url: "https://5bf8041cb3fed.streamlock.net/zoefm/zoefm/playlist.m3u8",
+    type: "HLS",
+    category: "\ud83d\ude4f\ud83c\udffb CANALES CRISTIANOS",
+    number: 121
+  },
+  {
+    name: "BAND",
+    url: "https://5b7f3c45ab7c2.streamlock.net/arapuan/ngrp:arapuan_all/playlist.m3u8",
+    type: "HLS",
+    category: "BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 122
+  },
+  {
+    name: "RECORD",
+    url: "http://tvconquistalrv.duckdns.org:8080/hls/tvconquistalrv.m3u8",
+    type: "HLS",
+    category: "BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 123
+  },
+  {
+    name: "CNN BRASIL",
+    url: "https://d25usgadhphvwi.cloudfront.net/hls/main.m3u8",
+    type: "HLS",
+    category: "BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 124
+  },
+  {
+    name: "AGRO CANAL",
+    url: "https://607d2a1a47b1f.streamlock.net/crur/smil:canalrural.smil/chunklist_w1004797184.m3u8",
+    type: "HLS",
+    category: "BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 125
+  },
+  {
+    name: "REDES BRASIL",
+    url: "https://video09.logicahost.com.br/redebrasiloficial/redebrasiloficial/chunklist_w1413219916.m3u8",
+    type: "HLS",
+    category: "BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 126
+  },
+  {
+    name: "RUNTIME A\u00c7\u00c3O",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=2552",
+    type: "HLS",
+    category: "BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 127
+  },
+  {
+    name: "RUNTIME ROMANCE",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=4866",
+    type: "HLS",
+    category: "BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 128
+  },
+  {
+    name: "RUNTIME CRIME",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=4864",
+    type: "HLS",
+    category: "BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 129
+  },
+  {
+    name: "SBT",
+    url: "https://cdn.live.br1.jmvstream.com/w/LVW-10801/LVW10801_Xvg4R0u57n/chunklist.m3u8",
+    type: "HLS",
+    category: "BRASIL\ud83c\udde7\ud83c\uddf7",
+    number: 130
+  },
+  {
+    name: "TELEMUNDO NOTICIAS",
+    url: "https://d3rciv7av2te5a.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod-plex/master.m3u8?ads.xumo_channelId=88889467",
+    type: "HLS",
+    category: "TELEMUNDO INTERNACIONAL",
+    number: 131
+  },
+  {
+    name: "TELEMUNDO 51",
+    url: "https://d368vp0qqzvkid.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_nbc-direct/32d83610-b3ed-4e0c-bc1a-9cf4055cc405/3.m3u8",
+    type: "HLS",
+    category: "TELEMUNDO INTERNACIONAL",
+    number: 132
+  },
+  {
+    name: "TELEMUNDO ACCION",
+    url: "https://d3rciv7av2te5a.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod-plex/master.m3u8?ads.xumo_channelId=88889470",
+    type: "HLS",
+    category: "TELEMUNDO INTERNACIONAL",
+    number: 133
+  },
+  {
+    name: "TELEMUNDO 3",
+    url: "https://d1rqgw5gocwo9i.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-nbcu-stitched/10a44c37-f976-4d2b-ab23-8637a7a094ca/3.m3u8",
+    type: "HLS",
+    category: "TELEMUNDO INTERNACIONAL",
+    number: 134
+  },
+  {
+    name: "FREE TV ACCION",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=16317",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 135
+  },
+  {
+    name: "FREE TV CRIMEN",
+    url: "https://oly-ftvcbr.otteravision.com/oly/ftvcbr/ftvcbr.m3u8",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 136
+  },
+  {
+    name: "FREE TV DRAMA BRASIL",
+    url: "https://oly-ftvcbr.otteravision.com/oly/ftvdrbr/ftvdrbr.m3u8",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 137
+  },
+  {
+    name: "Popcom Central Canal 6.4",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=16333",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 138
+  },
+  {
+    name: "FREE TV ASIA",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=16328",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 139
+  },
+  {
+    name: "FREE CLASICO",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=16324",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 140
+  },
+  {
+    name: "FREE TV DRAMA",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=16316",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 141
+  },
+  {
+    name: "FREE TV ESTELAR",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=16318",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 142
+  },
+  {
+    name: "FREE TV LIVE",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=16329",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 143
+  },
+  {
+    name: "FREE TV SURE\u00d1O",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=16323",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 144
+  },
+  {
+    name: "FREE TV TERROR",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=16319",
+    type: "HLS",
+    category: "FREE TV LIVE",
+    number: 145
+  },
+  {
+    name: "MIEDO TV",
+    url: "https://streams2.sofast.tv/ptnr-stirr/genre-Movies/lang-Spanish/ctgr-Movies/title-MI-MIEDO-CANAL-SPA/sofastplayout/bf03a5cc-e672-9612-ef64-5296cfdb_HLS/playlist.m3u8",
+    type: "HLS",
+    category: "ESPECIAL HALLOWEN",
+    number: 146
+  },
+  {
+    name: "GRITOS",
+    url: "https://streams2.sofast.tv/ptnr-stirr/genre-Movies/lang-Spanish/ctgr-Movies/title-TRINIAN-GRITOS-TV-SPA/vglive-sk-187404/playlist.m3u8",
+    type: "HLS",
+    category: "ESPECIAL HALLOWEN",
+    number: 147
+  },
+  {
+    name: "HORROR",
+    url: "https://streams2.sofast.tv/ptnr-yupptv/title-HORROR-TV-ENG_yupptv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/93dc292b-cbcf-4988-ab97-94feced4c14b/master.m3u8?hdnts=st=1761557896~exp=1761561496~acl=!*/611d79b11b77e2f571934fd80ca1413453772ac7/93dc292b-cbcf-4988-ab97-94feced4c14b/*!yuppTVCom_5_-1_181b8e8f22fd430d_UY_179.27.200.30/payload/yuppTVCom_5_-1_181b8e8f22fd430d_UY_179.27.200.30/*~hmac=c15e71b0f2f9872e5136ffede3c7c2894792365643f3099ce6292a08732f949f&ads.app_bundle=&ads.app_store_url=&ads.content_livestream=1&ads.language=ENG&ads.content_genre=OTH&ads.channel=6607&ads.channel_name=HORRORTV&ads.network_name=yupptv&ads.user=0",
+    type: "HLS",
+    category: "ESPECIAL HALLOWEN",
+    number: 148
+  },
+  {
+    name: "ESPANTO FILM FEST",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=6126&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "ESPECIAL HALLOWEN",
+    number: 149
+  },
+  {
+    name: "SONY ONE ACCION",
+    url: "https://375132e20edd4ed0bbddadeefa5b652d.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-829-ES-SONYONEHITSACCIN-LG_ES/playlist.m3u8",
+    type: "HLS",
+    category: "ESPECIAL HALLOWEN",
+    number: 150
+  },
+  {
+    name: "VALLE NUEVO TV",
+    url: "https://stmv6.voxtvhd.com.br/vallenuevotv/vallenuevotv/playlist.m3u8",
+    type: "HLS",
+    category: "CINES VARIADOS 24/7",
+    number: 151
+  },
+  {
+    name: "CANELA CINEMA",
+    url: "https://amg00658-amg00658c8-canelatv-international-7227.playouts.now.amagi.tv/playlist/amg00658-canelamediafast-cinemalt-canelatvinternational/playlist.m3u8",
+    type: "HLS",
+    category: "CINES VARIADOS 24/7",
+    number: 152
+  },
+  {
+    name: "RETRO PLUS",
+    url: "https://scl.edge.grupoz.cl/retroplustvuno/live/playlist.m3u8",
+    type: "HLS",
+    category: "CINES VARIADOS 24/7",
+    number: 153
+  },
+  {
+    name: "CINE PLEX",
+    url: "https://amg00658-amg00658c95-canelatv-international-6696.playouts.now.amagi.tv/playlist/amg00658-canelamediafast-pelimexta-canelatvinternational/playlist.m3u8",
+    type: "HLS",
+    category: "CINES VARIADOS 24/7",
+    number: 154
+  },
+  {
+    name: "FILM RISE",
+    url: "https://d3rciv7av2te5a.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod-plex/master.m3u8?ads.xumo_channelId=88889309",
+    type: "HLS",
+    category: "CINES VARIADOS 24/7",
+    number: 155
+  },
+  {
+    name: "CR JNGO",
+    url: "https://amogonetworx-grjngo-2-eu.plex.wurl.tv/playlist.m3u8",
+    type: "HLS",
+    category: "CINES VARIADOS 24/7",
+    number: 156
+  },
+  {
+    name: "ACCION",
+    url: "https://amg01024-olympusat-topcinelatam-ono-ad-99.amagi.tv/1080p-cc/index.m3u8",
+    type: "HLS",
+    category: "CINES VARIADOS 24/7",
+    number: 157
+  },
+  {
+    name: "FAMILIA TV",
+    url: "https://amg01024-olympusat-juntos-ono-ad-h5.amagi.tv/1080p-cc/index.m3u8",
+    type: "HLS",
+    category: "CINES VARIADOS 24/7",
+    number: 158
+  },
+  {
+    name: "RUNTIME 1",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=2154&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "RUNTIME CINE PREMIUM",
+    number: 159
+  },
+  {
+    name: "RUNTIME 2",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?&network_id=2218&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "RUNTIME CINE PREMIUM",
+    number: 160
+  },
+  {
+    name: "COMEDIA",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=6127&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "RUNTIME CINE PREMIUM",
+    number: 161
+  },
+  {
+    name: "ESPANTO",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=6126&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "RUNTIME CINE PREMIUM",
+    number: 162
+  },
+  {
+    name: "FAMILIA",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=6118&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "RUNTIME CINE PREMIUM",
+    number: 163
+  },
+  {
+    name: "ROMANCE",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=6119&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "RUNTIME CINE PREMIUM",
+    number: 164
+  },
+  {
+    name: "PELISES",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=2152&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "RUNTIME CINE PREMIUM",
+    number: 165
+  },
+  {
+    name: "CRIMEN",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=6129&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "RUNTIME CINE PREMIUM",
+    number: 166
+  },
+  {
+    name: "SERIES",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=6132&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "RUNTIME CINE PREMIUM",
+    number: 167
+  },
+  {
+    name: "ACCION",
+    url: "https://stream.ads.ottera.tv/playlist.m3u8?network_id=2550&avod=1&coppa=0&is_lat=0",
+    type: "HLS",
+    category: "RUNTIME CINE PREMIUM",
+    number: 168
+  },
+  {
+    name: "DIRECTV SPORT",
+    url: "http://167.17.67.240:8888/DSPORTS/tracks-v1a1/mono.m3u8",
+    type: "HLS",
+    category: "\u26bdDEPORTES ESPN Y FOX SPORTS AR\ud83c\udde6\ud83c\uddf7()",
+    number: 169
+  },
+  {
+    name: "Directv sport 2",
+    url: "http://167.17.67.240:8888/dsport2colombia/tracks-v1a1/mono.m3u8",
+    type: "HLS",
+    category: "\u26bdDEPORTES ESPN Y FOX SPORTS AR\ud83c\udde6\ud83c\uddf7()",
+    number: 170
+  },
+  {
+    name: "DIRECTV SPORT 2",
+    url: "http://167.17.67.240:8888/dsport2colombia/tracks-v1a1/mono.m3u8",
+    type: "HLS",
+    category: "\u26bdDEPORTES ESPN Y FOX SPORTS AR\ud83c\udde6\ud83c\uddf7()",
+    number: 171
+  },
+  {
+    name: "DIRECTV SPORT 2",
+    url: "http://167.17.67.240:8888/Dsportsmas/tracks-v1a1/mono.m3u8",
+    type: "HLS",
+    category: "\u26bdDEPORTES ESPN Y FOX SPORTS AR\ud83c\udde6\ud83c\uddf7()",
+    number: 172
+  },
+  {
+    name: "Canal 20",
+    url: "https://live20.bozztv.com/giatv/giatv-canal20hd/canal20hd/chunks.m3u8",
+    type: "HLS",
+    category: "INTERIOR PY",
+    number: 173
+  },
+  {
+    name: "HISTORY CHANNEL",
+    url: "http://181.13.252.102:8000/play/a051/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 174
+  },
+  {
+    name: "HISTORY 2",
+    url: "http://181.13.252.102:8000/play/a0ab/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 175
+  },
+  {
+    name: "AE MUNDO",
+    url: "http://45.170.130.224:8000/play/a022/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 176
+  },
+  {
+    name: "AXN",
+    url: "http//45.170.130.224:8000/play/a03g/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 177
+  },
+  {
+    name: "ANIMAL PLANET",
+    url: "http://45.170.130.224:8000/play/a01t/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 178
+  },
+  {
+    name: "CNN CHILE",
+    url: "http://45.170.130.224:8000/play/a00y/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 179
+  },
+  {
+    name: "CANAL DE LAS ESTRELLAS",
+    url: "http://45.170.130.224:8000/play/a026/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 180
+  },
+  {
+    name: "CARTOON NETWOR",
+    url: "http://45.170.130.224:8000/play/a011/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 181
+  },
+  {
+    name: "CINECANAL",
+    url: "http://45.170.130.224:8000/play/a00t/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 182
+  },
+  {
+    name: "CINEMAX",
+    url: "https://45.170.130.224:8000/play/a03e/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 183
+  },
+  {
+    name: "DISCOVERY CHANEL",
+    url: "http://45.170.130.224:8000/play/a01s/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 184
+  },
+  {
+    name: "DISVOVERY CHANEL CLON",
+    url: "https://45.170.130.224:8000/play/a04u/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 185
+  },
+  {
+    name: "DISCOVERY ID",
+    url: "https://45.170.130.224:8000/play/a02b/index.m3u8",
+    type: "HLS",
+    category: "CHANEL HISTORY",
+    number: 186
+  },
+  {
+    name: "ESPN 1 HD",
+    url: "http://181.13.252.102:8000/play/a05a/index.m3u8",
+    type: "HLS",
+    category: "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+    number: 187
+  },
+  {
+    name: "ESPN 2 HD",
+    url: "http://181.13.252.102:8000/play/a059/index.m3u8",
+    type: "HLS",
+    category: "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+    number: 188
+  },
+  {
+    name: "ESPN 3 HD",
+    url: "http://181.13.252.102:8000/play/a05b/index.m3u8",
+    type: "HLS",
+    category: "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+    number: 189
+  },
+  {
+    name: "ESPN 4 HD",
+    url: "http://181.13.252.102:8000/play/a076/index.m3u8",
+    type: "HLS",
+    category: "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+    number: 190
+  },
+  {
+    name: "Fox Sport 2",
+    url: "http://181.13.252.102:8000/play/a05c/index.m3u8",
+    type: "HLS",
+    category: "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+    number: 191
+  },
+  {
+    name: "Fox sport 1",
+    url: "http://181.209.105.115:2525/play/foxsports/index.m3u8",
+    type: "HLS",
+    category: "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+    number: 192
+  },
+  {
+    name: "Fox sport 3",
+    url: "http://181.13.252.102:8000/play/a02t/index.m3u8",
+    type: "HLS",
+    category: "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+    number: 193
+  },
+  {
+    name: "ESPN PREMIUM",
+    url: "http://181.13.252.102:8000/play/a078/index.m3u8",
+    type: "HLS",
+    category: "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+    number: 194
+  },
+  {
+    name: "ESPN 5",
+    url: "http://181.13.252.102:8000/play/a05a/index.m3u8",
+    type: "HLS",
+    category: "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+    number: 195
+  },
+  {
+    name: "Ty C Sports",
+    url: "http://181.13.252.102:8000/play/a02s/index.m3u8",
+    type: "HLS",
+    category: "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+    number: 196
   }
 ];
 
 const CATEGORIES = [
-  'Todos',
-  'Nacionales',
-  'Noticias',
-  'Deportes',
-  'Cine',
-  'Series',
-  'Premium',
-  'Infantil',
-  'Documentales',
-  'Entretenimiento',
-  'Musica',
-  'Internacionales',
-  'Interior',
-  'Educacion',
-  'Gourmet',
-  'Estilo'
+  "Todos",
+  "ARGENTINA\ud83c\udde6\ud83c\uddf7",
+  "BRASIL\ud83c\udde7\ud83c\uddf7",
+  "CANALES PARAGUAYO",
+  "CHANEL HISTORY",
+  "CINE Y SERIES \ud83c\udfac",
+  "CINES VARIADOS 24/7",
+  "DEPORTE ARGENTINA SAT",
+  "DEPORTE BRASIL\ud83c\udde7\ud83c\uddf7",
+  "DEPORTE CHILE\ud83c\udde8\ud83c\uddf1",
+  "DEPORTE ECUADOR\ud83c\uddea\ud83c\udde8",
+  "DEPORTE ESPA\u00d1A\ud83c\uddea\ud83c\uddf8",
+  "DEPORTE MEXICO\ud83c\uddf2\ud83c\uddfd",
+  "DEPORTE PER\u00da\ud83c\uddf5\ud83c\uddea",
+  "DEPORTES ESPN Y FOX SPORT ARGENTINA\ud83c\udde6\ud83c\uddf7",
+  "Deportes Argentina Sin cortes\ud83c\udde6\ud83c\uddf7",
+  "Directv Sport \ud83c\udde6\ud83c\uddf7",
+  "ESPECIAL HALLOWEN",
+  "ESPN COLOMBIA\ud83c\udde8\ud83c\uddf4",
+  "ESPN DISNEY+",
+  "EVENTOS DEL DIA",
+  "FREE TV LIVE",
+  "FUTBOL LOCAL",
+  "GRAN HERMANO ARG.",
+  "INTERIOR PY",
+  "INTERNACIONALES",
+  "PARAGUAY",
+  "RUNTIME CINE PREMIUM",
+  "TELEMUNDO INTERNACIONAL",
+  "\u26bd DEPORTES VARIADOS",
+  "\u26bdDEPORTES ESPN Y FOX SPORTS AR\ud83c\udde6\ud83c\uddf7()",
+  "\ud83c\udfac CINES 24/7",
+  "\ud83c\udfceDeportes Motors\ud83c\udfc1",
+  "\ud83d\ude4f\ud83c\udffb CANALES CRISTIANOS",
 ];

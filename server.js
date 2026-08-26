@@ -6,6 +6,7 @@ const url = require('url');
 
 const PORT = 8080;
 const TOKEN_URL = 'https://magisvideo.com/token_flow_automatico/token.json';
+const BASE_DIR = path.join(__dirname);
 
 const mimeTypes = {
     '.html': 'text/html',
@@ -65,7 +66,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     // Static files
-    let filePath = '.' + (parsedUrl.pathname === '/' ? '/index.html' : parsedUrl.pathname);
+    let filePath = path.join(BASE_DIR, parsedUrl.pathname === '/' ? '/index.html' : parsedUrl.pathname);
     const ext = String(path.extname(filePath)).toLowerCase();
     const contentType = mimeTypes[ext] || 'application/octet-stream';
 
