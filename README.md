@@ -2,6 +2,32 @@
 
 Reproductor de TV en streaming con canales argentinos e internacionales.
 
+## IMPORTANTE - Requisito
+
+**Necesitas ejecutar un servidor local** para evitar problemas de CORS. No funciona abriendo `index.html` directamente.
+
+## Inicio Rapido
+
+### Opcion 1: Python (Recomendado)
+```bash
+cd tv-player
+python3 -m http.server 8080
+```
+
+### Opcion 2: Node.js
+```bash
+cd tv-player
+node server.js
+```
+
+### Opcion 3: Script automatico
+```bash
+chmod +x start.sh
+./start.sh
+```
+
+Luego abre en tu navegador: **http://localhost:8080**
+
 ## Caracteristicas
 
 - **89 canales** de TV en vivo
@@ -12,6 +38,24 @@ Reproductor de TV en streaming con canales argentinos e internacionales.
 - **Busqueda** - Filtrado de canales por nombre
 - **Responsive** - Funciona en desktop y movil
 - **Controles TV** - Navegacion con teclado y control remoto
+
+## Controles
+
+| Tecla | Accion |
+|-------|--------|
+| Flechas ↑↓ | Navegar canales |
+| Numeros | Seleccionar canal directamente |
+| Ctrl+D | Modo debug |
+| Esc | Cerrar menu movil |
+
+## Modo Debug
+
+Para ver informacion de depuracion:
+1. Presiona `Ctrl+D` en el navegador
+2. O abre la consola (F12) y ejecuta:
+   - `testChannel(0)` - Probar canal especifico
+   - `testAllChannels()` - Probar primeros 10 canales
+   - `getDebugInfo()` - Ver log de debug
 
 ## Canales Incluidos
 
@@ -29,25 +73,14 @@ Reproductor de TV en streaming con canales argentinos e internacionales.
 | Musica | 3 |
 | Otros | 13 |
 
-## Tecnologias
-
-- JW Player 8.38.2
-- DRM ClearKey
-- DASH streaming
-- HTML5 / CSS3 / JavaScript
-
-## Uso
-
-1. Abrir `index.html` en un navegador
-2. Seleccionar un canal de la barra lateral
-3. Usar flechas del teclado para navegar
-4. Presionar numeros para seleccionar canal directamente
-
 ## Estructura
 
 ```
 tv-player/
 ├── index.html          # Pagina principal
+├── server.js           # Servidor Node.js
+├── start.sh            # Script de inicio (Linux/Mac)
+├── start.bat           # Script de inicio (Windows)
 ├── css/
 │   └── style.css       # Estilos
 ├── js/
@@ -57,9 +90,22 @@ tv-player/
 └── README.md
 ```
 
-## Notas
+## Solucion de Problemas
 
-- Los canales utilizan streaming DASH con DRM ClearKey
-- El token de acceso se obtiene automaticamente del servidor
-- Algunos canales pueden no estar disponibles en todo momento
-- Se recomienda conexion a internet estable para mejor calidad
+### Error CORS
+Si ves errores de CORS en la consola, asegurate de estar ejecutando el servidor local.
+
+### Canal no reproduce
+1. Abre la consola (F12)
+2. Ejecuta `testChannel(numero_del_canal)`
+3. Revisa los errores mostrados
+
+### Token no obtiene
+Verifica tu conexion a internet. El token se obtiene de `magisvideo.com`.
+
+## Tecnologias
+
+- JW Player 8.38.2
+- DRM ClearKey
+- DASH streaming
+- HTML5 / CSS3 / JavaScript
