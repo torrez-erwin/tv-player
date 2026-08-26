@@ -6,17 +6,17 @@
   <title>TV Player</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="https://ssl.p.jwpcdn.com/player/v/8.38.2/jwplayer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
 </head>
 <body>
   <div id="app">
     <div id="player-container">
       <div class="homeScreen" id="homeScreen">
         <h1>TV Player</h1>
-        <span id="appError">Los canales no funcionan en este momento. Intentelo mas tarde...</span>
-        <div class="loader"></div>
+        <span id="appError">Selecciona un canal para comenzar</span>
         <div class="debug-info" id="debugInfo"></div>
       </div>
-      <div id="player"></div>
+      <video id="player" controls autoplay></video>
     </div>
 
     <div class="channelList" id="channelList"></div>
@@ -34,10 +34,6 @@
     </div>
 
     <div class="programInfo" id="programInfo">
-      <div class="programImage">
-        <img class="programImageBanner" id="programBanner" src="">
-        <img class="channelImage" id="channelLogo" src="">
-      </div>
       <div class="programDescription">
         <h1 id="programTitle"></h1>
         <p id="programDesc"></p>

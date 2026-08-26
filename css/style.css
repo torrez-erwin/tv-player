@@ -42,6 +42,8 @@ body {
 #player {
   width: 100%;
   height: 100%;
+  background: #000;
+  object-fit: contain;
 }
 
 /* Home Screen */

@@ -1,17 +1,7 @@
-let playerInstance = null;
 let currentChannel = null;
 let hlsInstance = null;
 
-function initPlayer() {
-  jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
-  playerInstance = jwplayer('player');
-}
-
 function playChannel(channel) {
-  if (!playerInstance) {
-    initPlayer();
-  }
-
   const homeScreen = document.getElementById('homeScreen');
   if (homeScreen) homeScreen.style.display = 'none';
 
@@ -24,7 +14,11 @@ function playChannel(channel) {
     return;
   }
 
-  console.log('Playing:', channel.name, 'URL:', streamUrl.substring(0, 80) + '...');
+  const video = document.getElementById('player');
+  if (!video) {
+    showError('Elemento video no encontrado');
+    return;
+  }
 
   if (hlsInstance) {
     hlsInstance.destroy();
@@ -33,55 +27,39 @@ function playChannel(channel) {
 
   const isHLS = streamUrl.includes('.m3u8') || channel.type === 'HLS';
 
-  try {
-    playerInstance.setup({
-      playlist: [{
-        sources: [{
-          default: true,
-          type: isHLS ? 'hls' : 'dash',
-          file: streamUrl
-        }]
-      }],
-      width: '100%',
-      height: '100%',
-      autostart: true,
-      mute: false,
-      volume: 100,
-      primary: 'html5',
-      hlshtml: true
+  console.log('Playing:', channel.name);
+
+  if (isHLS && Hls.isSupported()) {
+    hlsInstance = new Hls({
+      maxBufferLength: 30,
+      maxMaxBufferLength: 60,
+      startFragPrefetch: true
     });
 
-    playerInstance.on('ready', () => {
-      console.log('Player ready');
-      playerInstance.setMute(0);
-      playerInstance.setVolume(100);
+    hlsInstance.loadSource(streamUrl);
+    hlsInstance.attachMedia(video);
 
-      const platform = window.navigator.platform;
-      if (platform !== 'Win32') {
-        playerInstance.setFullscreen(true);
+    hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+      console.log('HLS manifest parsed, playing...');
+      video.play().catch(e => console.log('Autoplay blocked:', e));
+    });
+
+    hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+      console.error('HLS error:', data.type, data.details);
+      if (data.fatal) {
+        showError('Error al reproducir: ' + data.details);
       }
     });
 
-    playerInstance.on('play', () => {
-      console.log('Playback started');
+  } else if (isHLS && video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = streamUrl;
+    video.addEventListener('loadedmetadata', () => {
+      video.play().catch(e => console.log('Autoplay blocked:', e));
     });
 
-    playerInstance.on('firstFrame', () => {
-      console.log('First frame rendered');
-    });
-
-    playerInstance.on('error', (e) => {
-      console.error('Player error:', e);
-      showError('Error al reproducir el canal. Intenta otro canal.');
-    });
-
-    playerInstance.on('buffer', () => {
-      console.log('Buffering...');
-    });
-
-  } catch (error) {
-    console.error('Error setting up player:', error);
-    showError('Error al reproducir el canal: ' + error.message);
+  } else {
+    video.src = streamUrl;
+    video.play().catch(e => console.log('Autoplay blocked:', e));
   }
 }
 
@@ -100,6 +78,6 @@ function hideError() {
   }
 }
 
-async function refreshStream(channel) {
+function refreshStream(channel) {
   playChannel(channel || currentChannel);
 }
